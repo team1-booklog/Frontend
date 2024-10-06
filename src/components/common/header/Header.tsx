@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { PiSignIn, PiSignOut } from "react-icons/pi";
-import cn from '../../libs/cn.ts';
+import cn from '../../../libs/cn.ts';
 
 export default function Header() {
   const navigate = useNavigate();
