@@ -34,6 +34,7 @@ export default function BookList() {
   return (
     <div className="flex justify-center">
       <div className="grid grid-cols-3 xl:grid-cols-4 gap-4 max-w-5xl mx-auto">
+        
         {tempData.bookList.map((book, index) => (
           <BookCardComponent 
             key={index} 
