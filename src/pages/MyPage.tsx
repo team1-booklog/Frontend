@@ -10,9 +10,11 @@ export default function MyPage() {
 
   return (
     <>
-      <div className="px-60 pt-28">
-        <h1 className="text-4xl font-semibold mb-3">{userName}</h1>
-        <p className="text-2xl mb-12">
+      <div className="px-10 md:px-60 pt-14 md:pt-28">
+        <h1 className="text-xl md:text-4xl font-semibold mb-3">
+          {userName}
+        </h1>
+        <p className="text-base md:text-2xl mb-6 md:mb-12">
           지금까지 <span className="text-[#EC6B53]">{bookCount}권</span>의 책을 읽고 <span className="text-[#EC6B53]">{bookReportCount}개</span>의 독후감을 작성했어요.
         </p>
         <hr />
