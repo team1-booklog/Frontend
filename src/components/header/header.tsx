@@ -26,7 +26,7 @@ export default function Header() {
         <div>
           <span 
             onClick={handleUserNameClick}
-            className="mr-14 text-sm md:text-xl"
+            className="mr-4 md:mr-14 text-base md:text-xl"
           >
             {userName} 님
           </span>
