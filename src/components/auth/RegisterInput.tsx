@@ -17,20 +17,38 @@ export default function RegisterInput({
   const handleCheckClick = () => {
     const inputElement = document.getElementsByName(name)[0] as HTMLInputElement
     const username = inputElement.value
+    if (!username) {
+      alert('아이디를 입력하세요.')
+      return
+    }
     handleDuplicateCheck(username)
   }
 
   return (
-    <div className={`flex flex-row ${name === '아이디' ? 'gap-8' : 'gap-4'}`}>
-      <p className="py-5 text-lg text-nowrap">{name}</p>
+    <div
+      className={`flex flex-row ${
+        name === 'username'
+          ? 'gap-16'
+          : name === 'confirmPassword'
+            ? 'gap-3'
+            : 'gap-12'
+      }`}
+    >
+      <p className="py-5 text-lg text-nowrap">
+        {name === 'username'
+          ? '아이디'
+          : name === 'confirmPassword'
+            ? '비밀번호 확인'
+            : '비밀번호'}
+      </p>
       <div className="flex flex-row items-center border-b-[1px] border-b-[#918f8f] w-full">
         <input
-          type="text"
+          type={`${name === 'username' ? 'text' : 'password'}`}
           placeholder={placeholder}
-          className="w-full px-3 focus:outline-none"
+          className="w-full px-3 placeholder-[#918f8f] focus:outline-none"
           {...register(name)}
         />
-        {name === '아이디' && (
+        {name === 'username' && (
           <button
             type="button"
             className="w-20 h-8 items-center bg-[#2B5877] hover:bg-opacity-70 rounded-lg text-xs text-[#fafafa] text-nowrap"
@@ -39,7 +57,7 @@ export default function RegisterInput({
             중복확인
           </button>
         )}
-        {name === '비밀번호' && <div className="invisible w-20 h-8"></div>}
+        {name === 'password' && <div className="invisible w-20 h-8"></div>}
       </div>
     </div>
   )

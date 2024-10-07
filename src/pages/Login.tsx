@@ -1,6 +1,7 @@
 import AuthHeader from '../components/auth/AuthHeader'
 import AuthImg from '../assets/images/AuthImg.svg'
-import { AuthForm } from '../components/auth/AuthForm'
+//import { AuthForm } from '../components/auth/AuthForm'
+import LoginForm from '../components/auth/LoginForm'
 
 export default function Login() {
   return (
@@ -16,7 +17,7 @@ export default function Login() {
           <div className="w-72 md:w-[600px] h-32 md:h-full">
             <div className="flex flex-col gap-7 md:gap-12">
               <p className="font-semibold text-3xl text-[#2B5877]">로그인</p>
-              <AuthForm />
+              <LoginForm />
             </div>
           </div>
         </div>

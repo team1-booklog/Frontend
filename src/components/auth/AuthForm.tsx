@@ -8,7 +8,7 @@ export const AuthForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {isRegister ? (
-        <RegisterForm register={register} errors={errors} />
+        <RegisterForm />
       ) : (
         <LoginForm register={register} errors={errors} />
       )}
