@@ -35,22 +35,27 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-12">
+      <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-2">
           <AuthInput
             icon={User}
             placeholder="아이디를 입력해 주세요"
             register={register}
             name="username"
-            error={errors.username?.message}
           />
           <AuthInput
             icon={Lock}
             placeholder="영문+숫자 8자리 이상의 비밀번호를 입력해 주세요"
             register={register}
             name="password"
-            error={errors.password?.message}
           />
+          <div className="h-6">
+            {(errors.username || errors.password) && (
+              <p className="text-xs text-[#ec6b53]">
+                아이디 또는 비밀번호를 다시 확인하세요.
+              </p>
+            )}
+          </div>
         </div>
         <div className="flex flex-col gap-2">
           <AuthBtn name="로그인" type="submit" />

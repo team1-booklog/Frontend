@@ -5,7 +5,6 @@ interface AuthInputProps {
   placeholder: string
   register: UseFormRegister<any>
   name: string
-  error?: string
 }
 
 export default function AuthInput({
@@ -13,17 +12,15 @@ export default function AuthInput({
   placeholder,
   register,
   name,
-  error,
 }: AuthInputProps) {
   return (
-    <div className="flex flex-row border-b-[1px] border-b-[#918f8f] gap-4">
-      <img src={icon} alt="Input Icon" className="p-2" />
+    <div className="flex flex-row border-b-[1px] border-b-[#918f8f] gap-4 py-4 px-3">
+      <img src={icon} alt="Input Icon" className="" />
       <input
         {...register(name)}
         className="w-full placeholder-[#918f8f] focus:outline-none"
         placeholder={placeholder}
       />
-      {error && <p className="text-red-500">{error}</p>}
     </div>
   )
 }
