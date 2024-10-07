@@ -7,7 +7,7 @@ export default function MyPage() {
   
   // 임시로 하드코딩한 유저 데이터
   const userName = '홍길동';
-  const bookCount = 4;
+  let bookCount = 4;
   const bookReportCount = 15;
 
   return (
