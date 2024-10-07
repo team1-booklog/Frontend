@@ -99,7 +99,7 @@ export default function RegisterForm() {
           <button
             type="button"
             onClick={gotoLogin}
-            className="flex flex-row w-20 h-fit gap-2 items-center"
+            className="flex flex-row w-20 h-fit mb-4 gap-2 items-center"
           >
             <img src={Back} alt="BackIcon" className="w-5 h-5" />
             <p className="text-sm text-nowrap">돌아가기</p>
