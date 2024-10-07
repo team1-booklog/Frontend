@@ -36,11 +36,11 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
   return (
     <div
       className={cn(
-        'relative w-full flex justify-center items-center mt-6 md:mt-20 gap-2',
-        'font-rockwell font-normal px-4 md:px-10',
+        'relative w-full flex justify-center items-center mt-6 md:mt-20 xl:mt-24',
+        'gap-2 font-rockwell font-normal px-4 md:px-20 xl:px-40',
       )}
     >
-      <div className="relative w-full max-w-[1200px] border-b-2 border-[#2B5877]">
+      <div className="relative w-full max-w-[1600px] border-b-2 border-[#2B5877]">
         <input
           type="text"
           placeholder={placeholder}
@@ -64,6 +64,5 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
         </button>
       </div>
     </div>
-
   );
 }

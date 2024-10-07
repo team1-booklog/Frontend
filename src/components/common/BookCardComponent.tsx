@@ -18,7 +18,7 @@ export default function BookCardComponent({ title, imageUrl }: BookCardComponent
           "hover:scale-105 hover:shadow-2xl hover:translate-y-2" 
         )}
       />
-      <h3 className="text-center text-sm md:text-base lg:text-lg font-semibold">
+      <h3 className="text-center text-sm md:text-base lg:text-lg">
         { title }
       </h3>
     </div>

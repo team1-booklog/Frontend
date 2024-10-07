@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import cn from '../libs/cn.ts';
 import SearchBar from '../components/MainPage/SearchBar.tsx';
+import CurrentlyTrendingBook from '../components/MainPage/CurrentlyTrendingBook.tsx';
 
 export default function MainPage() {
+  const [isSearch, setIsSearch] = useState(false);
 
   const handleSearch = (searchText: string) => {
-    // 검색어로 검색 결과 처리
     alert(`검색 결과 페이지로 이동합니다. 검색어: ${searchText}`);
+    setIsSearch(true);
   };
 
   return (
@@ -33,6 +36,10 @@ export default function MainPage() {
 
       {/* Search Bar */}
       <SearchBar onSearch={handleSearch} />
+    
+      <div>
+        {!isSearch && <CurrentlyTrendingBook />}
+      </div>
     </>
   );
 }
