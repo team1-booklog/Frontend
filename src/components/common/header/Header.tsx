@@ -2,7 +2,11 @@ import { useNavigate } from 'react-router-dom'
 import { PiSignIn, PiSignOut } from 'react-icons/pi'
 import cn from '../../../libs/cn.ts'
 
-export default function Header() {
+interface HeaderProps {
+  isBordered?: boolean
+}
+
+export default function Header({ isBordered }: HeaderProps) {
   const navigate = useNavigate()
   const handleLogoClick = () => {
     navigate('/')
@@ -19,7 +23,9 @@ export default function Header() {
   const userName = '홍길동'
 
   return (
-    <header className="bg-[#2B5877] text-white p-5">
+    <header
+      className={`bg-[#2B5877] text-white p-5 ${isBordered ? 'fixed w-full rounded-b-3xl z-50' : ''}`}
+    >
       <div className="flex justify-between mx-0 md:mx-20">
         <h1 onClick={handleLogoClick} className="text-3xl ">
           Booklog

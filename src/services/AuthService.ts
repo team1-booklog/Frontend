@@ -1,0 +1,13 @@
+import { AuthCredentials } from '../model/Auth'
+
+export const signUp = async (data: AuthCredentials): Promise<void> => {
+  // 추후 회원가입 로직 추가 예정
+  console.log('회원가입 요청:', data)
+}
+
+export const login = async (data: AuthCredentials): Promise<string> => {
+  // 추후 로그인 로직 추가 예정
+  console.log('로그인 요청:', data)
+  // 성공 시 더미 토큰 반환
+  return 'dummy-token'
+}
