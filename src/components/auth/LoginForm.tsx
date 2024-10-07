@@ -35,7 +35,7 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col md:gap-5">
         <div className="flex flex-col gap-2">
           <AuthInput
             icon={User}
