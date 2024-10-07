@@ -16,12 +16,15 @@ export default function MainPage() {
       <div
         className={cn(
           'relative w-full flex-col justify-center text-center',
-          'flex flex-col items-center mt-16 md:mt-20 xl:mt-32 gap-3 md:gap-6',
+          'flex flex-col items-center gap-3 md:gap-6',
           'w-fit font-rockwell font-normal'
         )}
       >
         <h1 
-          className="w-fit text-4xl md:text-6xl xl:text-8xl text-[#2B5877]"
+          className={cn(
+            "w-fit text-4xl md:text-6xl xl:text-8xl text-[#2B5877]",
+            "mt-14 md:mt-20 xl:mt-32"
+          )}
           style={{ letterSpacing: '0.1em' }}
         >
           BookLog
