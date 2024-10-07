@@ -1,6 +1,6 @@
 export default function AuthHeader() {
   return (
-    <div className="relative w-full h-60 md:h-80 xl:h-[464px] flex items-center justify-center bg-[#F1F1F1] z-0">
+    <div className="relative w-full h-60 md:h-80 xl:h-[382px] flex items-center justify-center bg-[#F1F1F1] z-0">
       <div className="text-center pt-14 md:px-32">
         <div className="flex flex-col items-center mt-6 md:mt-20 gap-6 w-fit font-rockwell font-normal">
           <h1 className="w-fit text-3xl md:text-5xl xl:text-8xl text-[#2B5877]">
