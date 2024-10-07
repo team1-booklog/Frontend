@@ -1,12 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import  MagnifyingGlass from '../assets/icons/MagnifyingGlass.svg';
 import cn from '../libs/cn.ts';
 
 export default function MainPage() {
   const [searchText, setSearchText] = useState("");
-  useEffect(() => {
-    console.log("searchText changed: ", searchText);
-  }, [searchText]);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  
+  const handleButtonClick = () => {
+    // 'Enter' keydown event 생성
+    const enterKeyDownEvent = new KeyboardEvent('keydown', {
+      key: 'Enter',
+      code: 'Enter',
+      bubbles: true
+    });
+
+    if (inputRef.current) {
+      inputRef.current.dispatchEvent(enterKeyDownEvent);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.nativeEvent.isComposing || e.key !== "Enter") {
+      return;
+    }
+    e.preventDefault();
+
+    // 검색 결과 페이지로 이동
+    alert(`검색 결과 페이지로 이동합니다. 검색어: ${searchText}`);
+  };
 
   return (
     <>
@@ -15,7 +36,7 @@ export default function MainPage() {
       "flex flex-col items-center mt-10 md:mt-20 gap-3 md:gap-6",
       "w-fit font-rockwell font-normal"
     )}>
-      <h1 className="w-fit text-3xl md:text-5xl xl:text-8xl text-[#2B5877]">
+      <h1 className="w-fit text-3xl md:text-6xl xl:text-8xl text-[#2B5877]">
         BookLog
       </h1>
       <h2 className="w-fit text-base md:text-2xl xl:text-4xl text-[#918F8F]">
@@ -33,14 +54,16 @@ export default function MainPage() {
           type="text"
           placeholder="궁금한 책 제목이나 저자를 검색해보세요!"
           value={searchText}
+          ref={inputRef}
+          onKeyDown={handleKeyDown}
           onChange={(e) => setSearchText(e.target.value)}
           className={cn(
-            "w-[300px] sm:w-[600px] xl:w-[1200px] p-2 inline-block text-center",
-            "text-base md:text-xl xl:text-3xl"
+            "w-[300px] sm:w-[600px] md:w-[730px] xl:w-[1200px] p-2 inline-block text-center",
+            "text-base md:text-xl xl:text-3xl focus:outline-none"
           )}
         />
         <button
-          onClick={() => alert("Search for " + searchText)}
+          onClick={handleButtonClick}
           className="ml-0 md:ml-2"
         >
           <img src={MagnifyingGlass} alt="Search" className="w-4 md:w-6 h-4 md:h-6" />
