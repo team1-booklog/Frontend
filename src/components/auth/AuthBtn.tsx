@@ -9,10 +9,10 @@ export default function AuthBtn({ name, type, onClick }: AuthBtnProps) {
     <button
       type={type}
       onClick={onClick}
-      className={`h-16 rounded-2xl ${name === '로그인' ? 'bg-[#2B5877]' : 'bg-[#ffffff] border-2 border-[#2B5877]'}`}
+      className={`group h-16 rounded-2xl ${name === '로그인' ? 'bg-[#2B5877] hover:bg-opacity-60' : 'bg-[#ffffff] border-2 border-[#2B5877] hover:bg-[#7C97A9] hover:border-none'}`}
     >
       <p
-        className={`text-xl ${name === '로그인' ? 'text-[#fafafa]' : 'text-[#2B5877]'}`}
+        className={`text-xl ${name === '로그인' ? 'text-[#ffffff]' : 'text-[#2B5877] group-hover:text-[#fafafa]'}`}
       >
         {name}
       </p>
