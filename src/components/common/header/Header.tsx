@@ -19,7 +19,7 @@ export default function Header() {
   const userName = '홍길동'
 
   return (
-    <header className="bg-[#2B5877] text-white p-4">
+    <header className="bg-[#2B5877] text-white p-5">
       <div className="flex justify-between mx-0 md:mx-20">
         <h1 onClick={handleLogoClick} className="text-3xl ">
           Booklog

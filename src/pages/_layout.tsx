@@ -5,7 +5,7 @@ export default function Layout() {
   return (
     <div>
       <Header />
-      <main>
+      <main className='-mt-4 bg-white rounded-2xl'>
         <Outlet />
       </main>
     </div>
