@@ -1,6 +1,5 @@
 import AuthHeader from '../components/auth/AuthHeader'
 import AuthImg from '../assets/images/AuthImg.svg'
-//import { AuthForm } from '../components/auth/AuthForm'
 import LoginForm from '../components/auth/LoginForm'
 
 export default function Login() {

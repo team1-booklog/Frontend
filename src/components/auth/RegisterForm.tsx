@@ -7,6 +7,7 @@ import { registerSchema } from '../../validation/RegisterSchema'
 import RegisterInput from './RegisterInput'
 import Back from '../../assets/icons/Back.svg'
 import { AuthCredentials } from '../../model/Auth'
+import { signUp } from '../../services/AuthService'
 
 export default function RegisterForm() {
   const navigate = useNavigate()
@@ -30,23 +31,22 @@ export default function RegisterForm() {
     return navigate('/login')
   }
 
-  const onSubmit = (data: AuthCredentials) => {
-    if (!data.username || !data.password || !data.confirmPassword) {
-      alert('모든 필드를 입력해 주세요.')
-      return
-    }
-
-    console.log('회원가입 데이터:', data)
+  const onSubmit = async (data: AuthCredentials) => {
+    await signUp(data)
+    alert('회원가입 확인')
+    navigate('/login')
   }
 
   return (
     <div className="flex flex-col md:gap-5">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mb-8">
           <RegisterInput
             placeholder="아이디를 입력해 주세요"
             register={register}
             name="username"
+            required
+            isValid={!!watchedUsername && !errors.username}
           />
           <li
             className={`ml-28 text-xs ${
@@ -68,6 +68,7 @@ export default function RegisterForm() {
             placeholder="비밀번호를 입력해 주세요"
             register={register}
             name="password"
+            required
           />
           <li
             className={`ml-28 text-xs ${
@@ -83,6 +84,7 @@ export default function RegisterForm() {
             placeholder="비밀번호 확인을 입력해 주세요"
             register={register}
             name="confirmPassword"
+            required
           />
           <div className="ml-28 h-4">
             {watchedPassword !== watchedConfirmPassword && (

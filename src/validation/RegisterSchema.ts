@@ -18,6 +18,6 @@ export const registerSchema = yup.object().shape({
     .required('비밀번호는 필수입니다.'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password')], '비밀번호가 일치하지 않습니다.') // 비밀번호와 일치하는지 확인
+    .oneOf([yup.ref('password')], '비밀번호가 일치하지 않습니다.')
     .required('비밀번호 재확인이 필요합니다.'),
 })

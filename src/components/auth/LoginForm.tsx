@@ -4,21 +4,24 @@ import AuthBtn from './AuthBtn'
 import { AuthCredentials } from '../../model/Auth'
 import User from '../../assets/icons/User.svg'
 import Lock from '../../assets/icons/Lock.svg'
+import { useNavigate } from 'react-router-dom'
+import { login } from '../../services/AuthService'
 
 export default function LoginForm() {
+  const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<AuthCredentials>()
 
-  const onSubmit = (data: AuthCredentials) => {
-    if (!data.username || !data.password || !data.confirmPassword) {
-      alert('모든 필드를 입력해 주세요.')
-      return
-    }
-
+  const onSubmit = async (data: AuthCredentials) => {
     console.log('로그인 데이터:', data)
+
+    await login(data)
+    alert('로그인 확인')
+    navigate('/main')
   }
 
   return (
@@ -30,12 +33,14 @@ export default function LoginForm() {
             placeholder="아이디를 입력해 주세요"
             register={register}
             name="username"
+            required
           />
           <LoginInput
             icon={Lock}
             placeholder="영문+숫자 8자리 이상의 비밀번호를 입력해 주세요"
             register={register}
             name="password"
+            required
           />
           <div className="h-6">
             {(errors.username || errors.password) && (
@@ -47,7 +52,11 @@ export default function LoginForm() {
         </div>
         <div className="flex flex-col gap-2">
           <AuthBtn name="로그인" type="submit" />
-          <AuthBtn name="회원가입" type="button" />
+          <AuthBtn
+            name="회원가입"
+            type="button"
+            onClick={() => navigate('/register')}
+          />
         </div>
       </form>
     </div>

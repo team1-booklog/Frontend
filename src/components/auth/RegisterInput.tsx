@@ -4,13 +4,17 @@ import { UseDuplicatCheck } from '../../hooks/UseDuplicateCheck'
 interface RegisterInputProps {
   placeholder: string
   register: UseFormRegister<any>
-  name: string
+  name: 'username' | 'password' | 'confirmPassword'
+  required?: boolean
+  isValid?: boolean
 }
 
 export default function RegisterInput({
   placeholder,
   name,
   register,
+  required,
+  isValid,
 }: RegisterInputProps) {
   const { handleDuplicateCheck } = UseDuplicatCheck()
 
@@ -46,13 +50,14 @@ export default function RegisterInput({
           type={`${name === 'username' ? 'text' : 'password'}`}
           placeholder={placeholder}
           className="w-full px-3 placeholder-[#918f8f] focus:outline-none"
-          {...register(name)}
+          {...register(name, { required })}
         />
         {name === 'username' && (
           <button
             type="button"
-            className="w-20 h-8 items-center bg-[#2B5877] hover:bg-opacity-70 rounded-lg text-xs text-[#fafafa] text-nowrap"
-            onClick={handleCheckClick}
+            className={`w-20 h-8 items-center bg-[#2B5877] hover:bg-opacity-70 rounded-lg text-xs text-[#fafafa] text-nowrap ${isValid ? '' : 'opacity-50 cursor-not-allowed'}`} // 유효성에 따라 버튼 스타일 변경
+            onClick={isValid ? handleCheckClick : undefined}
+            disabled={!isValid}
           >
             중복확인
           </button>
