@@ -35,7 +35,7 @@ export default function CurrentlyTrendingBook() {
         지금 독자들이 <span className="text-[#EC6B53]">가장 많이 이야기하는 책</span>
       </h2>
       <div className="flex justify-center">
-        <div className="grid grid-cols-3 xl:grid-cols-4 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-3 xl:grid-cols-4 gap-4 max-w-5xl mx-auto px-4">
           
           {tempData.bookList.map((book, index) => (
             <BookCardComponent 
