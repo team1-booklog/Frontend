@@ -27,7 +27,7 @@ export default function LoginForm() {
   return (
     <div className="flex flex-col md:gap-5">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col mb-7 gap-2">
           <LoginInput
             icon={User}
             placeholder="아이디를 입력해 주세요"
