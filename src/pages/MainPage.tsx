@@ -1,75 +1,38 @@
-import { useState, useRef } from 'react';
-import  MagnifyingGlass from '../assets/icons/MagnifyingGlass.svg';
 import cn from '../libs/cn.ts';
+import SearchBar from '../components/MainPage/SearchBar.tsx';
 
 export default function MainPage() {
-  const [searchText, setSearchText] = useState("");
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  
-  const handleButtonClick = () => {
-    // 'Enter' keydown event 생성
-    const enterKeyDownEvent = new KeyboardEvent('keydown', {
-      key: 'Enter',
-      code: 'Enter',
-      bubbles: true
-    });
 
-    if (inputRef.current) {
-      inputRef.current.dispatchEvent(enterKeyDownEvent);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.nativeEvent.isComposing || e.key !== "Enter") {
-      return;
-    }
-    e.preventDefault();
-
-    // 검색 결과 페이지로 이동
+  const handleSearch = (searchText: string) => {
+    // 검색어로 검색 결과 처리
     alert(`검색 결과 페이지로 이동합니다. 검색어: ${searchText}`);
   };
 
   return (
     <>
-    <div className={cn(
-      "relative w-full flex-col justify-center text-center",
-      "flex flex-col items-center mt-10 md:mt-20 gap-3 md:gap-6",
-      "w-fit font-rockwell font-normal"
-    )}>
-      <h1 className="w-fit text-3xl md:text-6xl xl:text-8xl text-[#2B5877]">
-        BookLog
-      </h1>
-      <h2 className="w-fit text-base md:text-2xl xl:text-4xl text-[#918F8F]">
-        join our community and share your book reviews.
-      </h2>
-    </div>
-
-    {/* 검색 바 */}
-    <div className={cn(
-      "relative w-full flex justify-center items-center mt-6 md:mt-20 gap-2",
-      "font-rockwell font-normal"
-    )}>
-      <div className='border-b-2 border-[#2B5877]'>
-        <input
-          type="text"
-          placeholder="궁금한 책 제목이나 저자를 검색해보세요!"
-          value={searchText}
-          ref={inputRef}
-          onKeyDown={handleKeyDown}
-          onChange={(e) => setSearchText(e.target.value)}
-          className={cn(
-            "w-[300px] sm:w-[600px] md:w-[730px] xl:w-[1200px] p-2 inline-block text-center",
-            "text-base md:text-xl xl:text-3xl focus:outline-none"
-          )}
-        />
-        <button
-          onClick={handleButtonClick}
-          className="ml-0 md:ml-2"
+      <div
+        className={cn(
+          'relative w-full flex-col justify-center text-center',
+          'flex flex-col items-center mt-16 md:mt-20 xl:mt-32 gap-3 md:gap-6',
+          'w-fit font-rockwell font-normal'
+        )}
+      >
+        <h1 
+          className="w-fit text-4xl md:text-6xl xl:text-8xl text-[#2B5877]"
+          style={{ letterSpacing: '0.1em' }}
         >
-          <img src={MagnifyingGlass} alt="Search" className="w-4 md:w-6 h-4 md:h-6" />
-        </button>
+          BookLog
+        </h1>
+        <h2 className={cn(
+          "w-fit text-base md:text-2xl xl:text-4xl text-[#918F8F]",
+          'mb-6 md:mb-0'
+        )}>
+          join our community and share your book reviews.
+        </h2>
       </div>
-    </div>
+
+      {/* Search Bar */}
+      <SearchBar onSearch={handleSearch} />
     </>
   );
 }
