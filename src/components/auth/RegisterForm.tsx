@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
 import AuthBtn from './AuthBtn'
 import { AuthCredentials } from '../../model/Auth'
+import { useAuthStore } from '../../stores/UseAuthStore'
 import RegisterInput from './RegisterInput'
 import Back from '../../assets/icons/Back.svg'
 
@@ -12,6 +13,7 @@ interface RegisterFormProps {
 
 export default function RegisterForm({ register, errors }: RegisterFormProps) {
   const navigate = useNavigate()
+  const { duplicatedState } = useAuthStore()
 
   const gotoLogin = () => {
     return navigate('/login')
@@ -28,6 +30,13 @@ export default function RegisterForm({ register, errors }: RegisterFormProps) {
         <li className="ml-20 text-xs text-[#918f8f]">
           4-16자의 영문 소문자 혹은 영문+숫자를 입력해 주세요.
         </li>
+        <div className="ml-20 h-4">
+          {duplicatedState && (
+            <li className="text-xs text-[#ec6b53]">
+              이미 존재하는 아이디입니다.
+            </li>
+          )}
+        </div>
         <RegisterInput
           placeholder="비밀번호를 입력해 주세요"
           register={register}
