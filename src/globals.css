@@ -14,3 +14,17 @@
 body {
   font-family: 'SUIT Variable', sans-serif;
 }
+
+@font-face {
+  font-family: 'Rockwell';
+  src: url('/fonts/Rockwell-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rockwell';
+  src: url('/fonts/Rockwell-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
