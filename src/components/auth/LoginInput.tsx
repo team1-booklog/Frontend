@@ -1,18 +1,18 @@
 import { UseFormRegister } from 'react-hook-form'
 
-interface AuthInputProps {
+interface LoginInputProps {
   icon: string
   placeholder: string
   register: UseFormRegister<any>
   name: string
 }
 
-export default function AuthInput({
+export default function LoginInput({
   icon,
   placeholder,
   register,
   name,
-}: AuthInputProps) {
+}: LoginInputProps) {
   return (
     <div className="flex flex-row border-b-[1px] border-b-[#918f8f] gap-4 py-4 px-3">
       <img src={icon} alt="Input Icon" className="" />
