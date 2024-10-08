@@ -1,18 +1,14 @@
 import { useState, useRef } from 'react';
 import DefaultThubnail from '../../assets/images/DefaultThubnail.png';
 import cn from '../../libs/cn';
+import SearchBar from './BookReportHeader/SearchBar';
 
 export default function BookReportHeaderEditor() {
   const [title, setTitle] = useState<string>(''); 
   const [thumbnail, setThumbnail] = useState<string>('');
-  const [readBookTitle, setReadBookTitle] = useState<string>('독후감에 쓸 책을 검색해보세요.');
+  const [readBookTitle, setReadBookTitle] = useState<string>('');
 
-  // 파일 선택 input에 접근하기 위한 ref 생성
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
 
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -22,13 +18,13 @@ export default function BookReportHeaderEditor() {
     }
   };
 
-  const handleThumbnailButtonClick = () => {
-    fileInputRef.current?.click(); // 버튼 클릭 시 input 파일 선택 창 열기
+  const handleSearch = (searchText: string) => {
+    console.log('Search Text:', searchText);
+    // 검색어 처리 로직
   };
 
   return (
     <div className="p-5 flex justify-center items-center">
-      {/* 썸네일 이미지 */}
       <div className="mr-10 text-left max-w-36">
         <h2 className='text-2xl text-[#2B5877]'>썸네일</h2>
         <img 
@@ -36,19 +32,15 @@ export default function BookReportHeaderEditor() {
           alt="썸네일" 
           className="w-36 h-36 rounded-xl" 
         />
-        
-        {/* 파일 선택 input을 숨기고 ref로 접근 */}
         <input 
           ref={fileInputRef} 
           type="file" 
           accept="image/*" 
           onChange={handleThumbnailChange} 
-          className="hidden" // 인풋창 숨기기
+          className="hidden" 
         />
-
-        {/* 버튼으로 파일 선택 창 열기 */}
         <button 
-          onClick={handleThumbnailButtonClick}
+          onClick={() => fileInputRef.current?.click()}
           className={cn(
             "mt-2 block w-full text-sm text-gray-900 border border-gray-300",
             "rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
@@ -58,7 +50,6 @@ export default function BookReportHeaderEditor() {
         </button>
       </div>
 
-      {/* 제목 및 읽은 책 제목 */}
       <div className="flex-1 text-left max-w-4xl">
         <div className="mb-5">
           <h2 className="text-2xl text-[#2B5877] mb-2">제목</h2>
@@ -67,18 +58,17 @@ export default function BookReportHeaderEditor() {
             type="text" 
             placeholder="제목을 입력하세요" 
             value={title} 
-            onChange={handleTitleChange} 
+            onChange={(e) => setTitle(e.target.value)}
             className="w-full p-3 border border-gray-300 rounded-lg text-lg"
           />
         </div>
-        <div>
-          <h2 className="text-2xl text-[#2B5877] block mb-2">읽은 책</h2>
-          <div 
-            id="read-book-title" 
-            className="p-3 bg-gray-100 rounded-lg text-lg">
-            {readBookTitle}
-          </div>
-        </div>
+
+        {/* 분리된 SearchBar 컴포넌트 사용 */}
+        <SearchBar 
+          readBookTitle={readBookTitle} // 책 이름을 props로 전달
+          setReadBookTitle={setReadBookTitle} // 책 이름 업데이트 함수 전달
+          onSearch={handleSearch} // 검색 함수 전달
+        />
       </div>
     </div>
   );
