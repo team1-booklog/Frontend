@@ -1,3 +1,4 @@
+import Review from '../components/book/Review.tsx'
 import { useBook } from '../hooks/UseBook'
 import { getDisplayAuthor } from '../libs/AuthorUtils'
 import cn from '../libs/cn.ts'
@@ -77,6 +78,12 @@ export default function Book() {
               </p>
             </div>
           </button>
+        </div>
+        <div className="grid grid-cols-4 mt-11">
+          <Review />
+          <Review />
+          <Review />
+          <Review />
         </div>
       </div>
     </div>

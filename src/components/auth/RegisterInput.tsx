@@ -55,7 +55,7 @@ export default function RegisterInput({
         {name === 'username' && (
           <button
             type="button"
-            className={`w-20 h-8 items-center bg-[#2B5877] hover:bg-opacity-70 rounded-lg text-xs text-[#fafafa] text-nowrap ${isValid ? '' : 'opacity-50 cursor-not-allowed'}`} // 유효성에 따라 버튼 스타일 변경
+            className={`w-20 h-8 items-center bg-[#2B5877] hover:bg-opacity-70 rounded-lg text-xs text-[#fafafa] text-nowrap ${isValid ? '' : 'opacity-50 cursor-not-allowed'}`}
             onClick={isValid ? handleCheckClick : undefined}
             disabled={!isValid}
           >
