@@ -34,16 +34,16 @@ export default function SearchBar({ readBookTitle, onSearch, setReadBookTitle }:
 
   return (
     <div>
-      <h2 className="text-2xl text-[#2B5877] block mb-2">읽은 책</h2>
+      <h2 className="text-xl md:text-2xl text-[#2B5877] block mb-2">읽은 책</h2>
       <div className="relative w-full flex justify-center items-center">
         <input 
           type="text"
-          placeholder="궁금한 책 제목이나 저자를 검색해보세요!"
+          placeholder="궁금한 책 제목을 검색해보세요!"
           value={readBookTitle}
           ref={inputRef}
           onKeyDown={handleKeyDown}
           onChange={(e) => setReadBookTitle(e.target.value)}
-          className="w-full p-3 bg-gray-100 rounded-lg text-lg"
+          className="w-full p-3 bg-gray-100 rounded-lg text-base md:text-lg"
         />
         <button 
           className="absolute right-0 mr-2" 

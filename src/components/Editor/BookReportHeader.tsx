@@ -25,15 +25,15 @@ export default function BookReportHeaderEditor() {
 
   return (
     <div className={cn(
-      "p-8 flex justify-center items-center",
-      "mx-16 md:mx-24 xl:mx-32 border-b-2"
+      "p-4 md:p-8 flex justify-center",
+      "mx-0 md:mx-24 xl:mx-32 border-b-2"
     )}>
-      <div className="mr-10 text-left max-w-36">
-        <h2 className='text-2xl text-[#2B5877]'>썸네일</h2>
-        <img 
+      <div className="mr-4 md:mr-10 text-left max-w-36">
+        <h2 className='text-xl md:text-2xl text-[#2B5877]'>썸네일</h2>
+        <img
           src={thumbnail || DefaultThubnail} 
           alt="썸네일" 
-          className="w-36 h-36 rounded-xl" 
+          className="x-24 md:x-32 xl:w-36 h-24 md:h-32 xl:h-36 rounded-xl" 
         />
         <input 
           ref={fileInputRef} 
@@ -54,17 +54,15 @@ export default function BookReportHeaderEditor() {
       </div>
 
       <div className="flex-1 text-left max-w-2xl">
-        <div className="mb-5">
-          <h2 className="text-2xl text-[#2B5877] mb-2">제목</h2>
-          <input
-            id="title" 
-            type="text" 
-            placeholder="제목을 입력하세요" 
-            value={title} 
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg text-lg"
-          />
-        </div>
+        <h2 className="text-xl md:text-2xl text-[#2B5877] mb-2">제목</h2>
+        <input
+          id="title" 
+          type="text" 
+          placeholder="제목을 입력하세요" 
+          value={title} 
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-lg text-base md:text-lg mb-5"
+        />
 
         {/* SearchBar 컴포넌트 */}
         <SearchBar 
