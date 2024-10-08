@@ -33,7 +33,7 @@ export default function BookReportHeaderEditor() {
         <img
           src={thumbnail || DefaultThubnail} 
           alt="썸네일" 
-          className="x-24 md:x-32 xl:w-36 h-24 md:h-32 xl:h-36 rounded-xl" 
+          className="x-24 md:x-32 xl:w-36 h-24 md:h-32 xl:h-36 rounded-xl shadow-lg" 
         />
         <input 
           ref={fileInputRef} 
@@ -45,11 +45,11 @@ export default function BookReportHeaderEditor() {
         <button 
           onClick={() => fileInputRef.current?.click()}
           className={cn(
-            "mt-2 block w-full text-sm text-gray-900 border border-gray-300",
-            "rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+            "mt-2 block w-full text-sm text-gray-400",
+            "rounded-lg cursor-pointer focus:outline-none"
           )}
         >
-          썸네일 교체
+          썸네일 추가
         </button>
       </div>
 
@@ -63,7 +63,7 @@ export default function BookReportHeaderEditor() {
               placeholder="제목을 입력하세요" 
               value={title} 
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg text-base md:text-lg mb-5"
+              className="w-full p-3 border-b-2 border-gray-300 text-base md:text-lg mb-5"
             />
           </div>
 

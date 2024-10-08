@@ -25,7 +25,7 @@ export default function TextFiled({ context, setContext }: TextFiledProps) {
     <div className="flex justify-center items-center mt-8 px-8">
       <textarea
         ref={textareaRef}
-        placeholder="내용을 입력하세요"
+        placeholder="여기에 독후감을 자유롭게 작성해보세요."
         value={context}
         onChange={(e) => {
           setContext(e.target.value);
