@@ -51,7 +51,7 @@ export default function Book() {
           <p>No book data available.</p>
         )}
       </div>
-      <div className="pt-14 px-20">
+      <div className="pt-6 lg:pt-14 px-7 lg:px-20">
         <div className="flex justify-between mx-0 md:mx-20">
           <p className="font-semibold text-2xl md:text-3xl xl:text-5xl">
             독자들의 감상평
