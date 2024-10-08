@@ -1,6 +1,6 @@
 import { useBook } from '../hooks/UseBook'
 import { getDisplayAuthor } from '../libs/AuthorUtils'
-import Wrtie from '../assets/icons/Write.svg'
+import Write from '../assets/icons/Write.svg'
 
 export default function Book() {
   const { bookData, error } = useBook()
@@ -23,16 +23,21 @@ export default function Book() {
               <img
                 src={bookData.image}
                 alt={bookData.title}
-                className="w-56 h-80 bg-[#dbdbdb] border-[1px] border-[#dbdbdb] rounded-2xl shadow-lg"
+                className="w-auto h-80 bg-[#dbdbdb] border-[1px] border-[#dbdbdb] rounded-2xl shadow-lg"
               />
-              <div className="flex flex-col w-[654px]">
-                <div className="flex flex-col gap-2">
-                  <p className="font-semibold text-4xl">{bookData.title}</p>
-                  <p className="font-normal text-2xl text-nowrap">
+              <div className="flex flex-col w-[654px] pt-16">
+                <div className="flex flex-col gap-8">
+                  <p className="max-w-[648px] max-h-[93px] font-semibold text-4xl line-clamp-1">
+                    {bookData.title}
+                  </p>
+                  <p className="max-w-[648px] font-normal text-2xl">
                     {displayAuthor}
                   </p>
                 </div>
-                <p className="flex flex-grow items-end text-sm text-[#4e4d4d]">
+                <p
+                  className="pt-10 max-w-[648px] text-sm text-[#4e4d4d] line-clamp-5"
+                  style={{ lineHeight: '1.5', maxHeight: '180px' }}
+                >
                   {bookData.description}
                 </p>
               </div>
@@ -46,9 +51,9 @@ export default function Book() {
         <div className="flex justify-between">
           <p className="font-semibold text-5xl">독자들의 감상평</p>
           <button className="bg-[#2b5877] rounded-lg">
-            <div className="flex justify-center">
-              <img src={Wrtie} alt="WrtieIcon" className="" />
-              <p className="text-[#fafafa] text-sm">독후감 쓰기</p>
+            <div className="px-4 flex justify-center">
+              <img src={Write} alt="WriteIcon" className="" />
+              <p className="py-1 text-[#fafafa] text-sm">독후감 쓰기</p>
             </div>
           </button>
         </div>
