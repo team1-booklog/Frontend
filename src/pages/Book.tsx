@@ -17,21 +17,21 @@ export default function Book() {
 
   return (
     <div>
-      <div className="h-[552px] bg-[#f1f1f1]">
+      <div className="w-screen h-[552px] bg-[#f1f1f1]">
         {bookData ? (
           <div className="flex justify-center pt-36">
-            <div className="flex flex-row gap-28">
+            <div className="flex flex-row gap-5 sm:gap-16 md:gap-28">
               <img
                 src={bookData.image}
                 alt={bookData.title}
                 className={cn(
-                  'w-auto h-80 bg-[#dbdbdb] border-[1px]',
+                  'w-auto h-36 sm:h-60 md:h-80 bg-[#dbdbdb] border-[1px]',
                   'border-[#dbdbdb] rounded-2xl shadow-lg'
                 )}
               />
-              <div className="flex flex-col w-[654px] pt-16">
+              <div className="flex flex-col w-48 xl:w-[654px] pt-16">
                 <div className="flex flex-col gap-8">
-                  <p className="max-w-[648px] max-h-[93px] font-semibold text-4xl line-clamp-1">
+                  <p className="max-w-[648px] max-h-[93px] font-semibold text-sm md:text-2xl xl:text-4xl line-clamp-1">
                     {bookData.title}
                   </p>
                   <p className="max-w-[648px] font-normal text-2xl">
@@ -51,9 +51,11 @@ export default function Book() {
           <p>No book data available.</p>
         )}
       </div>
-      <div className="px-80 pt-14">
-        <div className="flex justify-between">
-          <p className="font-semibold text-5xl">독자들의 감상평</p>
+      <div className="pt-14 px-20">
+        <div className="flex justify-between mx-0 md:mx-20">
+          <p className="font-semibold text-2xl md:text-3xl xl:text-5xl">
+            독자들의 감상평
+          </p>
           <button
             className={cn(
               'group bg-[#2b5877] rounded-lg',
@@ -79,11 +81,13 @@ export default function Book() {
             </div>
           </button>
         </div>
-        <div className="grid grid-cols-4 mt-11">
-          <Review />
-          <Review />
-          <Review />
-          <Review />
+        <div className="flex justify-center mt-11">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto">
+            <Review />
+            <Review />
+            <Review />
+            <Review />
+          </div>
         </div>
       </div>
     </div>

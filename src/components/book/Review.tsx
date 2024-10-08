@@ -7,7 +7,7 @@ export default function Review() {
     <>
       <div
         className={cn(
-          'w-72 h-80 flex flex-col bg-[#fafafa] shadow-lg rounded-2xl',
+          'md:w-36 lg:w-52 xl:w-72 md:h-44 lg:h-60 xl:h-80 flex flex-col bg-[#fafafa] shadow-lg rounded-2xl',
           'transform transition duration-300 ease-in-out',
           'hover:scale-105 hover:shadow-2xl hover:translate-y-'
         )}
@@ -17,12 +17,16 @@ export default function Review() {
           alt="SampleReviewImg"
           className="w-full h-44 rounded-t-2xl"
         />
-        <p className="text-2xl text-[#2B5877] pt-2 px-8">
+        <p className="md:text-xl xl:text-2xl text-[#2B5877] pt-2 px-8">
           생의 외침 속에서 찾는 진정한 나
         </p>
-        <div className="flex flex-grow pt-8">
-          <p className="text-sm text-[#2B5877] ml-8">김해솔</p>
-          <p className="text-sm text-[#918F8F] pl-24">2024. 10. 5.</p>
+        <div className="flex flex-grow md:pt-0 xl:pt-8">
+          <p className="md:text-xs md:text-nowrap xl:text-sm text-[#2B5877] ml-8">
+            김해솔
+          </p>
+          <p className="md:text-xs md:text-nowrap xl:text-sm text-[#918F8F] pl-10 xl:pl-24">
+            2024. 10. 5.
+          </p>
         </div>
       </div>
     </>
