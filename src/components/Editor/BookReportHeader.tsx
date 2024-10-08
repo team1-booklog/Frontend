@@ -28,7 +28,7 @@ export default function BookReportHeaderEditor() {
       "p-4 md:p-8 flex justify-center",
       "mx-0 md:mx-24 xl:mx-32 border-b-2"
     )}>
-      <div className="mr-4 md:mr-10 text-left max-w-36">
+      <div className="hidden md:block mr-10 text-left max-w-36">
         <h2 className='text-xl md:text-2xl text-[#2B5877]'>썸네일</h2>
         <img
           src={thumbnail || DefaultThubnail} 
@@ -54,16 +54,30 @@ export default function BookReportHeaderEditor() {
       </div>
 
       <div className="flex-1 text-left max-w-2xl">
-        <h2 className="text-xl md:text-2xl text-[#2B5877] mb-2">제목</h2>
-        <input
-          id="title" 
-          type="text" 
-          placeholder="제목을 입력하세요" 
-          value={title} 
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg text-base md:text-lg mb-5"
-        />
+        <div className="flex justify-between">
+          <div className="flex-1">
+            <h2 className="text-xl md:text-2xl text-[#2B5877] mb-2">제목</h2>
+            <input
+              id="title" 
+              type="text" 
+              placeholder="제목을 입력하세요" 
+              value={title} 
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg text-base md:text-lg mb-5"
+            />
+          </div>
 
+          {/* 모바일에서만 보이는 썸네일 */}
+          <div className="flex flex-col items-start md:hidden ml-3">
+            <h2 className="text-center text-base text-[#2B5877] mb-2">썸네일</h2>
+            <img
+              src={thumbnail || DefaultThubnail} 
+              alt="썸네일" 
+              className="w-14 h-14 rounded-lg" 
+            />
+          </div>
+        </div>
+      
         {/* SearchBar 컴포넌트 */}
         <SearchBar 
           readBookTitle={readBookTitle} // 책 이름을 props로 전달
