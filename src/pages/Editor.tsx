@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import BookReportHeader from "../components/Editor/BookReportHeader"
+import TextFiled from "../components/Editor/TextFiled"
 
 export default function Editor() {
+  const [context, setContext] = useState<string>('');
+
   return (
     <div>
-      <h1>Editor</h1>
       <BookReportHeader />
+      <TextFiled context={context} setContext={setContext}/>
     </div>
   )
 };

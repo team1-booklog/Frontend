@@ -24,7 +24,10 @@ export default function BookReportHeaderEditor() {
   };
 
   return (
-    <div className="p-5 flex justify-center items-center">
+    <div className={cn(
+      "p-8 flex justify-center items-center",
+      "mx-16 md:mx-24 xl:mx-32 border-b-2"
+    )}>
       <div className="mr-10 text-left max-w-36">
         <h2 className='text-2xl text-[#2B5877]'>썸네일</h2>
         <img 
@@ -50,7 +53,7 @@ export default function BookReportHeaderEditor() {
         </button>
       </div>
 
-      <div className="flex-1 text-left max-w-4xl">
+      <div className="flex-1 text-left max-w-2xl">
         <div className="mb-5">
           <h2 className="text-2xl text-[#2B5877] mb-2">제목</h2>
           <input
@@ -63,7 +66,7 @@ export default function BookReportHeaderEditor() {
           />
         </div>
 
-        {/* 분리된 SearchBar 컴포넌트 사용 */}
+        {/* SearchBar 컴포넌트 */}
         <SearchBar 
           readBookTitle={readBookTitle} // 책 이름을 props로 전달
           setReadBookTitle={setReadBookTitle} // 책 이름 업데이트 함수 전달
