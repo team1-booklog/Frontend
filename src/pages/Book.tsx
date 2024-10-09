@@ -17,29 +17,29 @@ export default function Book() {
 
   return (
     <div>
-      <div className="w-screen h-[552px] bg-[#f1f1f1]">
+      <div className="w-screen h-64 md:h-[552px] bg-[#f1f1f1]">
         {bookData ? (
-          <div className="flex justify-center pt-36">
+          <div className="flex justify-center pt-24 md:pt-36">
             <div className="flex flex-row gap-5 sm:gap-16 md:gap-28">
               <img
                 src={bookData.image}
                 alt={bookData.title}
                 className={cn(
-                  'w-auto h-36 sm:h-60 md:h-80 bg-[#dbdbdb] border-[1px]',
+                  'w-auto h-36 md:h-80 lg:h-80 bg-[#dbdbdb] border-[1px]',
                   'border-[#dbdbdb] rounded-2xl shadow-lg'
                 )}
               />
-              <div className="flex flex-col w-48 xl:w-[654px] pt-16">
-                <div className="flex flex-col gap-8">
+              <div className="flex flex-col w-48 xl:w-[654px] pt-2 md:pt-16">
+                <div className="flex flex-col gap-2 xl:gap-8">
                   <p className="max-w-[648px] max-h-[93px] font-semibold text-sm md:text-2xl xl:text-4xl line-clamp-1">
                     {bookData.title}
                   </p>
-                  <p className="max-w-[648px] font-normal text-2xl">
+                  <p className="max-w-[648px] font-normal text-xs xl:text-2xl">
                     {displayAuthor}
                   </p>
                 </div>
                 <p
-                  className="pt-10 max-w-[648px] text-sm text-[#4e4d4d] line-clamp-5"
+                  className="pt-3 md:pt-6 xl:pt-10 max-w-[648px] text-sm text-[#4e4d4d] line-clamp-3  md:line-clamp-5"
                   style={{ lineHeight: '1.5', maxHeight: '180px' }}
                 >
                   {bookData.description}
@@ -51,7 +51,7 @@ export default function Book() {
           <p>No book data available.</p>
         )}
       </div>
-      <div className="pt-6 lg:pt-14 px-7 lg:px-20">
+      <div className="pt-6 lg:pt-14 px-7 md:px-20">
         <div className="flex justify-between mx-0 md:mx-20">
           <p className="font-semibold text-2xl md:text-3xl xl:text-5xl">
             독자들의 감상평
