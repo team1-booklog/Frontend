@@ -2,6 +2,7 @@ import Review from '../components/book/Review.tsx'
 import { useBook } from '../hooks/UseBook'
 import { getDisplayAuthor } from '../libs/AuthorUtils'
 import cn from '../libs/cn.ts'
+import NonReviwedBook from '../assets/images/NonReviewedBook.svg'
 
 export default function Book() {
   const { bookData, error } = useBook()
@@ -81,14 +82,27 @@ export default function Book() {
             </div>
           </button>
         </div>
-        <div className="flex justify-center mt-11">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto">
-            <Review />
-            <Review />
-            <Review />
-            <Review />
+        {bookData?.isbn === '9791163034735' ? (
+          <div className="flex justify-center mt-11">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto">
+              <Review />
+              <Review />
+              <Review />
+              <Review />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex flex-col px-20 pt-14 items-center">
+            <img
+              src={NonReviwedBook}
+              alt="NonReviwedBook"
+              className="w-52 h-auto"
+            />
+            <p className="text-2xl text-[#918f8f]">
+              아직 남겨진 독후감이 없습니다. <br /> 첫 번째 독후감을 남겨보세요!
+            </p>
+          </div>
+        )}
       </div>
     </div>
   )
