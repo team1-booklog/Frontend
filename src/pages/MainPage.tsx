@@ -2,13 +2,15 @@ import { useState } from 'react';
 import MainPageContext from '../components/MainPage/MainPageContext.tsx';
 import SearchBar from '../components/MainPage/SearchBar.tsx';
 import CurrentlyTrendingBook from '../components/MainPage/CurrentlyTrendingBook.tsx';
+import SearchResult from '../components/MainPage/SearchResult.tsx';
 
 export default function MainPage() {
   const [isSearch, setIsSearch] = useState(false);
+  const [searchText, setSearchText] = useState('');
 
   const handleSearch = (searchText: string) => {
-    alert(`검색 결과 페이지로 이동합니다. 검색어: ${searchText}`);
     setIsSearch(true);
+    setSearchText(searchText);
   };
 
   return (
@@ -16,10 +18,13 @@ export default function MainPage() {
       <MainPageContext />
 
       {/* Search Bar */}
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar 
+        onSearch={handleSearch} 
+        searchText={searchText}
+      />
     
       <div>
-        {!isSearch && <CurrentlyTrendingBook />}
+        {isSearch ? <SearchResult searchTerm={searchText} /> : <CurrentlyTrendingBook/>}
       </div>
     </>
   );

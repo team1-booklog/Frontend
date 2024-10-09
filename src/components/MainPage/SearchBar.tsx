@@ -1,26 +1,23 @@
 import { useState, useRef } from 'react';
-import MagnifyingGlass from'../../assets/icons/MagnifyingGlass.svg';
+import MagnifyingGlass from '../../assets/icons/MagnifyingGlass.svg';
 import cn from '../../libs/cn.ts';
 
 interface SearchBarProps {
+  searchText: string;
   onSearch: (searchText: string) => void;
 }
 
-export default function SearchBar({ onSearch }: SearchBarProps) {
-  const [searchText, setSearchText] = useState('');
+export default function SearchBar({ onSearch, searchText }: SearchBarProps) {
+  const [localSearchText, setLocalSearchText] = useState(searchText);
   const [placeholder, setPlaceholder] = useState('궁금한 책 제목이나 저자를 검색해보세요!');
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleButtonClick = () => {
-    const enterKeyDownEvent = new KeyboardEvent('keydown', {
-      key: 'Enter',
-      code: 'Enter',
-      bubbles: true,
-    });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLocalSearchText(e.target.value); // 입력한 텍스트 업데이트
+  };
 
-    if (inputRef.current) {
-      inputRef.current.dispatchEvent(enterKeyDownEvent);
-    }
+  const handleButtonClick = () => {
+    onSearch(localSearchText); // 검색어를 전달
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -29,8 +26,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
     }
     e.preventDefault();
     
-    // 검색어를 부모 컴포넌트에 전달
-    onSearch(searchText);
+    handleButtonClick(); // 엔터키 눌렀을 때 검색 버튼 클릭 동작 수행
   };
 
   return (
@@ -46,10 +42,10 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
           placeholder={placeholder}
           onFocus={() => setPlaceholder('')}
           onBlur={() => setPlaceholder('궁금한 책 제목이나 저자를 검색해보세요!')}
-          value={searchText}
+          value={localSearchText}
           ref={inputRef}
           onKeyDown={handleKeyDown}
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={handleInputChange}
           className={cn(
             'w-full p-2 text-center', // 반응형 너비
             'text-base md:text-xl xl:text-3xl focus:outline-none'
