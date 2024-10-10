@@ -5,24 +5,21 @@ import BookCardComponent from '../../common/BookCardComponent';
 interface SearchResultsProps {
   searchText: string;
   onResultClick: (result: string) => void;
+  setBookIsbn: (value: string) => void;
 }
 
-export default function SearchResults({ searchText, onResultClick }: SearchResultsProps) {
+export default function SearchResults({ searchText, onResultClick, setBookIsbn }: SearchResultsProps) {
   const { books, error, loading } = useSearchBookByName(searchText);
 
-  const handleBookClick = (bookTitle: string) => {
-    onResultClick(bookTitle);
+  const handleBookClick = (book:any) => {
+    onResultClick(book.title);
+    setBookIsbn(book.isbn);
   };
 
   return (
     <div className="p-4 relative">
       {loading && <p className="text-center">Loading...</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
-
-      {/* 검색 결과가 없을 때 */}
-      {!loading && !error && books.length === 0 && (
-        <p className="text-center">검색 결과가 없습니다.</p>
-      )}
 
       {/* 검색 결과 목록 */}
       <div
@@ -35,7 +32,7 @@ export default function SearchResults({ searchText, onResultClick }: SearchResul
               key={index}
               title={book.title}
               imageUrl={book.image}
-              onClick={() => handleBookClick(book.title)}
+              onClick={() => handleBookClick(book)}
             />
           ))}
         </div>
