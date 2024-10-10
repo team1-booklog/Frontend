@@ -8,8 +8,10 @@ export const signUp = async (data: AuthCredentials): Promise<void> => {
 export const login = async (data: AuthCredentials): Promise<string> => {
   // 추후 로그인 로직 추가 예정
   console.log('로그인 요청:', data)
-  // 성공 시 더미 토큰 반환
-  return 'dummy-token'
+
+  // 예시 더미 토큰
+  const dummyToken = 'dummy-token'
+  return Promise.resolve(dummyToken)
 }
 
 export const checkDuplicateId = async (username: string) => {
