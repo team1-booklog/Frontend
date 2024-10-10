@@ -72,14 +72,12 @@ export default function Book() {
               'hover:border-2 hover:border-[#2b5877] hover:bg-[#fafafa]'
             )}
           >
-            <div className="px-4 flex items-center gap-3">
+            <div className="px-3 xl:px-4 flex items-center gap-1 lg:gap-3">
               <svg
-                width="24"
-                height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="fill-[#fafafa] group-hover:fill-[#2b5877]"
+                className="w-3 lg:w-6 h-6 lg:h-6   md:h-3 xl:h-6 fill-[#fafafa] group-hover:fill-[#2b5877]"
               >
                 <g clipPath="url(#clip0_2242_1918)">
                   <path d="M3.76471 20.2353H5.24882L17.2918 8.19235L15.8076 6.70824L3.76471 18.7512V20.2353ZM2 22V18.0182L17.5182 2.50676C17.6961 2.3452 17.8925 2.22039 18.1074 2.13235C18.3225 2.04412 18.5479 2 18.7838 2C19.0197 2 19.2481 2.04186 19.4691 2.12559C19.6903 2.20931 19.8861 2.34245 20.0565 2.525L21.4932 3.97971C21.6758 4.1501 21.8059 4.34618 21.8835 4.56794C21.9612 4.78971 22 5.01147 22 5.23324C22 5.4699 21.9596 5.69569 21.8788 5.91059C21.798 6.12569 21.6695 6.32216 21.4932 6.5L5.98176 22H2ZM16.5368 7.46324L15.8076 6.70824L17.2918 8.19235L16.5368 7.46324Z" />
