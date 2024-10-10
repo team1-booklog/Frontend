@@ -1,15 +1,21 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import DefaultThubnail from '../../assets/images/DefaultThubnail.png';
 import cn from '../../libs/cn';
 import Search from './Search';
 
-export default function BookReportHeaderEditor() {
-  const [title, setTitle] = useState<string>(''); 
-  const [thumbnail, setThumbnail] = useState<string>('');
-  const [bookIsbn, setBookIsbn] = useState<string>(''); // 책의 ISBN 상태 추가
+interface BookReportHeaderEditorProps {
+  title: string;
+  setTitle: (value: string) => void;
+  thumbnail: string;
+  setThumbnail: (value: string) => void;
+  bookIsbn: string;
+  setBookIsbn: (value: string) => void;
+}
+
+export default function BookReportHeaderEditor(
+  {title, setTitle, thumbnail, setThumbnail, bookIsbn, setBookIsbn}: BookReportHeaderEditorProps) {
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -80,7 +86,6 @@ export default function BookReportHeaderEditor() {
         </div>
 
         <Search setBookIsbn={setBookIsbn}/>
-
       </div>
     </div>
   );
