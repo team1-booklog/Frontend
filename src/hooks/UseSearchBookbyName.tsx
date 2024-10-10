@@ -20,7 +20,7 @@ export const useSearchBookByName = (searchTerm: string) => {
         setLoading(true)
         setError(null)
         try {
-          const response = await axios.get(getBookSearchUrl(searchTerm), {
+          const response = await axios.get(getBookSearchUrl(searchTerm, 100), {
             headers: NAVER_API_HEADERS,
           })
 

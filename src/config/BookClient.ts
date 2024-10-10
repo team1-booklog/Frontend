@@ -5,5 +5,12 @@ export const NAVER_API_HEADERS = {
 
 const BOOK_SEARCH_ENDPOINT = '/v1/search/book.json'
 
-export const getBookSearchUrl = (query: string) =>
-  `${BOOK_SEARCH_ENDPOINT}?query=${query}`
+export const getBookSearchUrl = (query: string, display?: number) => {
+  let url = `${BOOK_SEARCH_ENDPOINT}?query=${query}`;
+  
+  if (display !== undefined) {
+    url += `&display=${display}`;
+  }
+
+  return url;
+}
