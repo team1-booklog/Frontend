@@ -28,19 +28,21 @@ export default function Editor() {
   , [title, context, bookIsbn]);
 
   return (
-    <div>
-      <BookReportHeader 
-        title={title}
-        setTitle={setTitle}
-        thumbnail={thumbnail}
-        setThumbnail={setThumbnail}
-        bookIsbn={bookIsbn}
-        setBookIsbn={setBookIsbn}
-      />
-      <TextFiled 
-        context={context}
-        setContext={setContext}
-      />
+    <div className='min-h-screen'>
+      <main className='pb-[80px]'>
+        <BookReportHeader 
+          title={title}
+          setTitle={setTitle}
+          thumbnail={thumbnail}
+          setThumbnail={setThumbnail}
+          bookIsbn={bookIsbn}
+          setBookIsbn={setBookIsbn}
+        />
+        <TextFiled 
+          context={context}
+          setContext={setContext}
+        />
+      </main>
       <Footer 
         isPostOk={isPostOk}
         onPost={onPost}
