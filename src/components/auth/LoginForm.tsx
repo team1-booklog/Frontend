@@ -6,9 +6,11 @@ import User from '../../assets/icons/User.svg'
 import Lock from '../../assets/icons/Lock.svg'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../services/AuthService'
+import { useAuthStore } from '../../stores/UseAuthStore'
 
 export default function LoginForm() {
   const navigate = useNavigate()
+  const { login: loginAction } = useAuthStore()
 
   const {
     register,
@@ -19,9 +21,14 @@ export default function LoginForm() {
   const onSubmit = async (data: AuthCredentials) => {
     console.log('로그인 데이터:', data)
 
-    await login(data)
-    alert('로그인 확인')
-    navigate('/main')
+    try {
+      const token = await login(data)
+      loginAction(token)
+      navigate('/')
+    } catch (error) {
+      console.error('로그인 에러:', error)
+      alert('로그인 중 오류가 발생했습니다.')
+    }
   }
 
   return (
