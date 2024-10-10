@@ -2,11 +2,13 @@ import { useState, useRef } from 'react';
 import DefaultThubnail from '../../assets/images/DefaultThubnail.png';
 import cn from '../../libs/cn';
 import SearchBar from './BookReportHeader/SearchBar';
+import SearchResults from './BookReportHeader/SearchResults';
 
 export default function BookReportHeaderEditor() {
   const [title, setTitle] = useState<string>(''); 
   const [thumbnail, setThumbnail] = useState<string>('');
   const [readBookTitle, setReadBookTitle] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>(''); // 검색어 상태 추가
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -18,9 +20,13 @@ export default function BookReportHeaderEditor() {
     }
   };
 
-  const handleSearch = (searchText: string) => {
-    console.log('Search Text:', searchText);
-    // 검색어 처리 로직
+  const handleSearch = (text: string) => {
+    setSearchText(text); 
+  };
+
+  const handleResultClick = (result: string) => {
+    setReadBookTitle(result); 
+    setSearchText(''); 
   };
 
   return (
@@ -80,9 +86,15 @@ export default function BookReportHeaderEditor() {
       
         {/* SearchBar 컴포넌트 */}
         <SearchBar 
-          readBookTitle={readBookTitle} // 책 이름을 props로 전달
-          setReadBookTitle={setReadBookTitle} // 책 이름 업데이트 함수 전달
-          onSearch={handleSearch} // 검색 함수 전달
+          readBookTitle={readBookTitle}
+          setReadBookTitle={setReadBookTitle}
+          onSearch={handleSearch}
+        />
+
+        {/* SearchResults 컴포넌트에 검색어 전달 */}
+        <SearchResults 
+          searchText={searchText}
+          onResultClick={handleResultClick}
         />
       </div>
     </div>
