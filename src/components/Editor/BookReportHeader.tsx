@@ -1,14 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import DefaultThubnail from '../../assets/images/DefaultThubnail.png';
 import cn from '../../libs/cn';
-import SearchBar from './BookReportHeader/SearchBar';
-import SearchResults from './BookReportHeader/SearchResults';
+import Search from './Search';
 
 export default function BookReportHeaderEditor() {
   const [title, setTitle] = useState<string>(''); 
   const [thumbnail, setThumbnail] = useState<string>('');
-  const [readBookTitle, setReadBookTitle] = useState<string>('');
-  const [searchText, setSearchText] = useState<string>(''); // 검색어 상태 추가
   const [bookIsbn, setBookIsbn] = useState<string>(''); // 책의 ISBN 상태 추가
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -19,15 +16,6 @@ export default function BookReportHeaderEditor() {
       const imageUrl = URL.createObjectURL(file);
       setThumbnail(imageUrl); // 이미지 미리보기
     }
-  };
-
-  const handleSearch = (text: string) => {
-    setSearchText(text); 
-  };
-
-  const handleResultClick = (result: string) => {
-    setReadBookTitle(result); 
-    setSearchText(''); 
   };
 
   useEffect(() => {
@@ -90,20 +78,9 @@ export default function BookReportHeaderEditor() {
             />
           </div>
         </div>
-      
-        {/* SearchBar 컴포넌트 */}
-        <SearchBar 
-          readBookTitle={readBookTitle}
-          setReadBookTitle={setReadBookTitle}
-          onSearch={handleSearch}
-        />
 
-        {/* SearchResults 컴포넌트에 검색어 전달 */}
-        <SearchResults 
-          searchText={searchText}
-          onResultClick={handleResultClick}
-          setBookIsbn={setBookIsbn}
-        />
+        <Search setBookIsbn={setBookIsbn}/>
+
       </div>
     </div>
   );
