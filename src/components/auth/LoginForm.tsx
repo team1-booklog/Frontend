@@ -1,67 +1,71 @@
 import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
+import LoginInput from './LoginInput'
+import AuthBtn from './AuthBtn'
 import { AuthCredentials } from '../../model/Auth'
-import { useAuth } from '../../hooks/UseAuth'
-import { login } from '../../services/AuthService'
 import User from '../../assets/icons/User.svg'
 import Lock from '../../assets/icons/Lock.svg'
-import AuthBtn from './AuthBtn'
-import AuthInput from './AuthInput'
+import { useNavigate } from 'react-router-dom'
+import { login } from '../../services/AuthService'
+import { useAuthStore } from '../../stores/UseAuthStore'
 
-const loginSchema = yup.object().shape({
-  username: yup.string().required('Username is required'),
-  password: yup.string().required('Password is required'),
-})
+export default function LoginForm() {
+  const navigate = useNavigate()
+  const { login: loginAction } = useAuthStore()
 
-export const LoginForm = () => {
-  const { login: authLogin } = useAuth()
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthCredentials>({
-    resolver: yupResolver(loginSchema),
-  })
+  } = useForm<AuthCredentials>()
 
   const onSubmit = async (data: AuthCredentials) => {
+    console.log('로그인 데이터:', data)
+
     try {
       const token = await login(data)
-      authLogin(token)
+      loginAction(token)
+      navigate('/')
     } catch (error) {
-      console.error('Login failed', error)
+      console.error('로그인 에러:', error)
+      alert('로그인 중 오류가 발생했습니다.')
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col md:gap-5">
-        <div className="flex flex-col gap-2">
-          <AuthInput
+    <div className="flex flex-col md:gap-5">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col mb-7 gap-2">
+          <LoginInput
             icon={User}
             placeholder="아이디를 입력해 주세요"
             register={register}
             name="username"
+            required
           />
-          <AuthInput
+          <LoginInput
             icon={Lock}
             placeholder="영문+숫자 8자리 이상의 비밀번호를 입력해 주세요"
             register={register}
             name="password"
+            required
           />
           <div className="h-6">
             {(errors.username || errors.password) && (
               <p className="text-xs text-[#ec6b53]">
-                아이디 또는 비밀번호를 다시 확인하세요.
+                아이디 또는 비밀번호를 다시 확인하세요
               </p>
             )}
           </div>
         </div>
         <div className="flex flex-col gap-2">
           <AuthBtn name="로그인" type="submit" />
-          <AuthBtn name="회원가입" type="button" />
+          <AuthBtn
+            name="회원가입"
+            type="button"
+            onClick={() => navigate('/register')}
+          />
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   )
 }

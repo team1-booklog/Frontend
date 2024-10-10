@@ -3,8 +3,12 @@ import Header from '../components/common/header/Header.tsx'
 import { Outlet } from 'react-router-dom'
 
 export default function Layout() {
-  const location = useLocation();
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+  const location = useLocation()
+  const isAuthPage =
+    location.pathname === '/login' ||
+    location.pathname === '/register' ||
+    /^\/book\/.+/.test(location.pathname)
+
   return (
     <div>
       <Header isBordered={isAuthPage} />
@@ -12,5 +16,5 @@ export default function Layout() {
         <Outlet />
       </main>
     </div>
-  );
+  )
 }
