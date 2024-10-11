@@ -46,7 +46,7 @@ export default function Header({ isBordered }: HeaderProps) {
       <div className="flex justify-between mx-0 md:mx-20">
         <h1
           onClick={handleLogoClick}
-          className="text-3xl font-rockwell font-normal"
+          className="text-3xl font-rockwell font-normal cursor-pointer select-none"
           style={{ letterSpacing: '0.1em' }}
         >
           Booklog
