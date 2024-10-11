@@ -51,7 +51,10 @@ export default function SearchBar({ onSearch, searchText }: SearchBarProps) {
             'text-base md:text-xl xl:text-2xl focus:outline-none'
           )}
         />
-        <button onClick={handleButtonClick} className="absolute right-0 mr-2">
+        <button 
+          onClick={handleButtonClick} 
+          className="absolute right-0 top-3 md:top-0 mr-2"
+        >
           <img 
             src={MagnifyingGlass} 
             alt="Search" 
