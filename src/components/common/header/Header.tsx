@@ -28,12 +28,16 @@ export default function Header({ isBordered }: HeaderProps) {
   return (
     <header
       className={cn(
-        'bg-[#2B5877] text-white p-5',
+        'bg-[#2B5877] text-white p-5 pb-7',
         `${isBordered && 'fixed w-full rounded-b-3xl z-50'}`
       )}
     >
       <div className="flex justify-between mx-0 md:mx-20">
-        <h1 onClick={handleLogoClick} className="text-3xl ">
+        <h1 
+          onClick={handleLogoClick}
+          className="text-3xl font-rockwell font-normal"
+          style={{ letterSpacing: '0.1em' }}
+        >
           Booklog
         </h1>
         {isLogin ? (
