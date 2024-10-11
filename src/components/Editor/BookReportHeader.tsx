@@ -16,12 +16,17 @@ export default function BookReportHeaderEditor(
   {title, setTitle, thumbnail, setThumbnail, bookIsbn, setBookIsbn}: BookReportHeaderEditorProps) {
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setThumbnail(imageUrl); // 이미지 미리보기
     }
+  };
+
+  const handleThumbnailClick = () => {
+    fileInputRef.current?.click();
   };
 
   useEffect(() => {
@@ -80,6 +85,7 @@ export default function BookReportHeaderEditor(
             <img
               src={thumbnail || DefaultThubnail} 
               alt="썸네일" 
+              onClick={handleThumbnailClick}
               className="w-14 h-14 rounded-lg" 
             />
           </div>
