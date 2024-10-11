@@ -27,7 +27,8 @@ export const useAuthStore = create<AuthState>((set) => ({
   login: (accessToken: string) => {
     set({ accessToken, isLogin: true })
   },
-  logout: () => set({ isLogin: false, accessToken: undefined }),
+  logout: () =>
+    set({ username: undefined, accessToken: undefined, isLogin: false }),
 
   duplicatedState: false,
   setIsDuplicated: () =>
