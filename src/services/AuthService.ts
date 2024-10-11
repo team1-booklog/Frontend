@@ -18,8 +18,11 @@ export const maintainLoginState = async () => {
         refreshToken: storedRefreshToken,
       })
       setAccessToken(newAccessToken)
-    } catch (error) {
-      console.error('로그인 상태 유지 실패:', error)
+    } catch (error: any) {
+      if (error.response.status === 404) {
+        alert('유효한 토큰을 찾을 수 없습니다.')
+      }
+      console.error('서버 에러', error)
     }
   }
 }
