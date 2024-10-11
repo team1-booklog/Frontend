@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { registerSchema } from '../../validation/RegisterSchema'
 import RegisterInput from './RegisterInput'
-import Back from '../../assets/icons/Back.svg'
+import Back from '../../assets/icons/BackForRegister.svg'
 import { AuthCredentials } from '../../model/Auth'
 import { signUp } from '../../services/AuthService'
 
