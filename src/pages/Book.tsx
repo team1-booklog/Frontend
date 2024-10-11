@@ -68,7 +68,7 @@ export default function Book() {
           <p>No book data available.</p>
         )}
       </div>
-      <div className="pt-6 lg:pt-14 px-7 md:px-20">
+      <div className="pt-6 lg:pt-14 px-7 pb-8 md:px-20">
         <div className="flex justify-between mx-0 md:mx-20">
           <p className="font-semibold text-2xl md:text-3xl xl:text-5xl">
             독자들의 감상평
@@ -111,9 +111,9 @@ export default function Book() {
             <img
               src={NonReviwedBook}
               alt="NonReviwedBook"
-              className="w-52 h-auto"
+              className="w-[136px] md:w-44 xl:w-52 h-auto "
             />
-            <p className="text-2xl text-[#918f8f]">
+            <p className="text-[16px] md:text-xl xl:text-2xl text-[#918f8f] mt-10 text-center text-nowrap">
               아직 남겨진 독후감이 없습니다. <br /> 첫 번째 독후감을 남겨보세요!
             </p>
           </div>
