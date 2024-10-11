@@ -7,10 +7,9 @@ import { ReissueRequest } from '../model/ReissueRequest'
 import { ReissueResponse } from '../model/ReissueResponse'
 import { useAuthStore } from '../stores/UseCurrentUserStore'
 
-const { setAccessToken } = useAuthStore()
-
 export const maintainLoginState = async () => {
   const storedRefreshToken = localStorage.getItem('refreshToken')
+  const { setAccessToken } = useAuthStore()
 
   if (storedRefreshToken) {
     try {
