@@ -12,6 +12,7 @@ export default function Editor() {
   const [isPostOk, setIsPostOk] = useState<boolean>(false);
   const navigate = useNavigate();
 
+
   const onPost = () => {
     // 게시하기 버튼 클릭 시 처리
   }
