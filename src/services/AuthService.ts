@@ -12,8 +12,14 @@ export const login = async (user: LoginRequest): Promise<LoginResponse> => {
   try {
     const response = await apiClient.post<LoginResponse>('/auth/login', user)
     return response.data
-  } catch (error) {
-    console.error('로그인 실패:', error)
+  } catch (error: any) {
+    if (error.response.status === 400) {
+      alert('비밀번호가 일치하지 않습니다.')
+    } else if (error.response.status === 404) {
+      alert('존재하지 않는 유저입니다.')
+    } else {
+      console.error('로그인 실패:', error)
+    }
     throw error
   }
 }
