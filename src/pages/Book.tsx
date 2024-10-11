@@ -34,15 +34,15 @@ export default function Book() {
 
   return (
     <div>
-      <div className="w-screen h-64 md:h-[552px] bg-[#f1f1f1]">
+      <div className="h-64 md:h-[552px] bg-[#f1f1f1]">
         {bookData ? (
-          <div className="flex justify-center pt-24 md:pt-36">
+          <div className="flex justify-center pt-24 md:pt-36 px-6">
             <div className="flex flex-row gap-5 sm:gap-16 md:gap-28">
               <img
                 src={bookData.image}
                 alt={bookData.title}
                 className={cn(
-                  'w-auto h-36 md:h-80 lg:h-80 bg-[#dbdbdb] border-[1px]',
+                  'w-auto h-[140px] md:h-80 lg:h-80 bg-[#dbdbdb] border-[1px]',
                   'border-[#dbdbdb] rounded-2xl shadow-lg'
                 )}
               />
