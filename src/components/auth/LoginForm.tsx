@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import LoginInput from './LoginInput'
 import AuthBtn from './AuthBtn'
-import { AuthCredentials } from '../../model/Auth'
+import { AuthCredentials } from '../../model/AuthCredentials'
 import User from '../../assets/icons/User.svg'
 import Lock from '../../assets/icons/Lock.svg'
 import { useNavigate } from 'react-router-dom'
