@@ -44,11 +44,13 @@ export default function RegisterForm() {
     const authRequestData = toAuthRequest(data)
 
     try {
-      const response = await signUp(authRequestData)
-
-      console.log('회원가입 응답:', response)
-
-      navigate('/login')
+      if (!duplicatedState) {
+        const response = await signUp(authRequestData)
+        console.log('회원가입 응답:', response)
+        navigate('/login')
+      } else {
+        alert('이미 존재하는 아이디입니다.')
+      }
     } catch (error) {
       console.error('회원가입 중 오류 발생:', error)
     }

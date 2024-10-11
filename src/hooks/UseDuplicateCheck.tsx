@@ -11,9 +11,13 @@ export const UseDuplicatCheck = () => {
       const responseCode = await checkDuplicateId(requestData)
 
       if (responseCode === 409) {
-        if (!duplicatedState) setIsDuplicated()
+        if (!duplicatedState) {
+          setIsDuplicated(true)
+        }
       } else if (responseCode === 200) {
-        if (duplicatedState) setIsDuplicated()
+        if (duplicatedState) {
+          setIsDuplicated(false)
+        }
       }
     } catch (error) {
       console.error('오류 발생:', error)

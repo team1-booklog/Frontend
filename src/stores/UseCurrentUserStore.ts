@@ -15,7 +15,7 @@ interface AuthState {
   logout: () => void
 
   duplicatedState: boolean
-  setIsDuplicated: () => void
+  setIsDuplicated: (isDuplicated: boolean) => void
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -45,6 +45,6 @@ export const useAuthStore = create<AuthState>((set) => ({
     }),
 
   duplicatedState: false,
-  setIsDuplicated: () =>
-    set((state) => ({ duplicatedState: !state.duplicatedState })),
+  setIsDuplicated: (isDuplicated: boolean) =>
+    set({ duplicatedState: isDuplicated }),
 }))
