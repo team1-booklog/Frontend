@@ -1,5 +1,5 @@
 import { checkDuplicateId } from '../services/AuthService'
-import { useAuthStore } from '../stores/UseAuthStore'
+import { useAuthStore } from '../stores/UseCurrentUserStore'
 
 export const UseDuplicatCheck = () => {
   const { duplicatedState, setIsDuplicated } = useAuthStore()

@@ -1,19 +1,21 @@
-import { AuthCredentials } from '../model/AuthCredentials'
 import { AuthRequest } from '../model/AuthRequest'
 import { AuthResponse } from '../model/AuthResponse'
+import { LoginRequest } from '../model/LoginRequest'
 import apiClient from '../config/ApiClient'
+import { LoginResponse } from '../model/LoginResponse'
 
 export const signUp = (user: AuthRequest) => {
   return apiClient.post<AuthResponse>('/users/signup', user)
 }
 
-export const login = async (data: AuthCredentials): Promise<string> => {
-  // 추후 로그인 로직 추가 예정
-  console.log('로그인 요청:', data)
-
-  // 예시 더미 토큰
-  const dummyToken = 'dummy-token'
-  return Promise.resolve(dummyToken)
+export const login = async (user: LoginRequest): Promise<LoginResponse> => {
+  try {
+    const response = await apiClient.post<LoginResponse>('/auth/login', user)
+    return response.data
+  } catch (error) {
+    console.error('로그인 실패:', error)
+    throw error
+  }
 }
 
 export const checkDuplicateId = async (username: string) => {

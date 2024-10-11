@@ -4,7 +4,7 @@ import { useBook } from '../hooks/UseBook'
 import { getDisplayAuthor } from '../libs/AuthorUtils'
 import cn from '../libs/cn.ts'
 import NonReviwedBook from '../assets/images/NonReviewedBook.svg'
-import { useAuthStore } from '../stores/UseAuthStore.ts'
+import { useAuthStore } from '../stores/UseCurrentUserStore.ts'
 
 export default function Book() {
   const { bookData, error } = useBook()
@@ -13,12 +13,13 @@ export default function Book() {
 
   const gotoEditor = () => {
     if (isLogin) {
-      const url = bookData?.isbn && bookData.title
-        ? `/editor?isbn=${encodeURIComponent(bookData.isbn)}&bookTitle=${encodeURIComponent(bookData.title)}`
-        : '/editor';
-      navigate(url);
+      const url =
+        bookData?.isbn && bookData.title
+          ? `/editor?isbn=${encodeURIComponent(bookData.isbn)}&bookTitle=${encodeURIComponent(bookData.title)}`
+          : '/editor'
+      navigate(url)
     } else {
-      navigate('/login');
+      navigate('/login')
     }
   }
 

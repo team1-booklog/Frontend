@@ -1,17 +1,35 @@
 import { create } from 'zustand'
 
-interface UserState {
+interface AuthState {
   username: string
-  accessToken: string
   setUsername: (username: string) => void
+
+  accessToken: string
   setAccessToken: (accessToken: string) => void
+
+  isLogin: boolean
+  login: (accessToken: string) => void
+  logout: () => void
+
+  duplicatedState: boolean
+  setIsDuplicated: () => void
 }
 
-const useCurrentUserState = create<UserState>((set) => ({
-  username: '',
-  accessToken: '',
-  setUsername: (newUsername) => set({ username: newUsername }),
-  setAccessToken: (newAccessToken) => set({ accessToken: newAccessToken }),
-}))
+export const useAuthStore = create<AuthState>((set) => ({
+  isLogin: false,
 
-export default useCurrentUserState
+  username: '',
+  setUsername: (username) => set({ username, isLogin: true }),
+
+  accessToken: '',
+  setAccessToken: (token) => set({ accessToken: token }),
+
+  login: (accessToken: string) => {
+    set({ accessToken, isLogin: true })
+  },
+  logout: () => set({ isLogin: false, accessToken: undefined }),
+
+  duplicatedState: false,
+  setIsDuplicated: () =>
+    set((state) => ({ duplicatedState: !state.duplicatedState })),
+}))

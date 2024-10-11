@@ -1,5 +1,5 @@
 import axios from 'axios'
-import useCurrentUserState from '../stores/UseCurrentUserStore'
+import { useAuthStore } from '../stores/UseCurrentUserStore'
 
 const apiClient = axios.create({
   baseURL: 'http://58.238.255.245:8080/api/v1',
@@ -8,7 +8,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     if (!config.url?.includes('/login') && !config.url?.includes('/register')) {
-      const { accessToken } = useCurrentUserState.getState()
+      const { accessToken } = useAuthStore.getState()
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`
       }

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import AuthBtn from './AuthBtn'
-import { useAuthStore } from '../../stores/UseAuthStore'
+import { useAuthStore } from '../../stores/UseCurrentUserStore'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { registerSchema } from '../../validation/RegisterSchema'
