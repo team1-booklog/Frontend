@@ -11,7 +11,7 @@ import { useAuthStore } from '../../stores/UseCurrentUserStore'
 
 export default function LoginForm() {
   const navigate = useNavigate()
-  const { setUsername, setAccessToken } = useAuthStore()
+  const { setUsername, setAccessToken, setRefreshToken } = useAuthStore()
 
   const {
     register,
@@ -32,6 +32,7 @@ export default function LoginForm() {
     try {
       const response = await login(loginRequestData)
       setAccessToken(response.accessToken)
+      setRefreshToken(response.refreshToken)
       setUsername(loginRequestData.id)
       navigate(-1)
     } catch (error) {
