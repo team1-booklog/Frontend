@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchBookData as fetchBookDetails } from '../services/BookService';
+import { HiDotsVertical } from "react-icons/hi";
+import cn from '../libs/cn';
 import DefaultThumbnail from '../assets/images/DefaultThubnail.png';
 import axios from 'axios';
 
@@ -84,14 +86,42 @@ export default function Article() {
   const { title: bookTitle } = bookData;
 
   return (
-    <div>
-      <img
-        src={thumbnail || DefaultThumbnail}
-        alt="게시글 썸네일"
-      />
-      <h1>{articleTitle}</h1>
-      <h2>{`${bookTitle}을 읽고`}</h2>
-      <p>{context}</p>
+    <div className='flex-col justify-center'>
+      <div className='w-full flex p-4 pt-16 gap-4 mx-auto max-w-5xl mb-6 md:mb-10'>
+        
+        <img
+          src={thumbnail || DefaultThumbnail}
+          alt="게시글 썸네일"
+          className='w-24 h-24 rounded-xl shadow-lg inline'
+        />
+
+        {/* 게시글 정보 */}
+        <div className='flex-1'>
+          <h1 className='text-lg font-semibold block mb-2'>{articleTitle}</h1>
+          <h2 className='text-sm mb-1'>
+            <span className='text-[#2B5877]'>{`${bookTitle}`}</span>을 읽고
+          </h2>
+          <h2 className='text-sm text-gray-400'>{articleData.date}</h2>
+        </div>
+          
+        {/* 수정, 삭제 버튼 */}
+        <div className='flex justify-end items-start'>
+          <button className='hidden md:block mr-2'>수정</button>
+          <button className='hidden md:block'>삭제</button>
+          <HiDotsVertical className='w-6 h-6 md:hidden' />
+        </div>
+      </div>
+
+      {/* 게시글 내용 */}
+      <div className={cn(
+        'w-full flex justify-center px-4 mx-auto max-w-5xl',
+        )}
+      >
+        {/* 선 만드려고 넣은 div */}
+        <div className='w-full border-t-2 border-gray-300'>
+          <p className='w-full mt-6'>{context}</p>
+        </div>
+      </div>
     </div>
   );
 }
