@@ -6,6 +6,8 @@ import { LoginResponse } from '../model/LoginResponse'
 import { ReissueRequest } from '../model/ReissueRequest'
 import { ReissueResponse } from '../model/ReissueResponse'
 import { useAuthStore } from '../stores/UseCurrentUserStore'
+import { DuplicationRequest } from '../model/DuplicationRequest'
+import { DuplicationResponse } from '../model/DuplicationResponse'
 
 export const maintainLoginState = async () => {
   const storedRefreshToken = localStorage.getItem('refreshToken')
@@ -66,10 +68,16 @@ export const login = async (user: LoginRequest): Promise<LoginResponse> => {
   }
 }
 
-export const checkDuplicateId = async (username: string) => {
-  // 추후 중복검사 로직 추가 예정
-  console.log('중복검사 중인 아이디:', username)
-  // 임시 아이디
-  const isExists = username === 'user1'
-  return isExists
+export const checkDuplicateId = async (id: DuplicationRequest) => {
+  try {
+    const response = await apiClient.get(`/users/duplication?id=${id.id}`)
+    return response.status
+  } catch (error: any) {
+    if (error.response?.status === 409) {
+      return 409
+    } else {
+      console.error('서버 통신 실패', error)
+    }
+    throw error
+  }
 }

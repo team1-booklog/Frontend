@@ -1,20 +1,22 @@
 import { checkDuplicateId } from '../services/AuthService'
 import { useAuthStore } from '../stores/UseCurrentUserStore'
+import { DuplicationRequest } from '../model/DuplicationRequest'
 
 export const UseDuplicatCheck = () => {
   const { duplicatedState, setIsDuplicated } = useAuthStore()
 
   const handleDuplicateCheck = async (username: string) => {
     try {
-      const isDuplicate = await checkDuplicateId(username)
-      if (isDuplicate) {
+      const requestData: DuplicationRequest = { id: username }
+      const responseCode = await checkDuplicateId(requestData)
+
+      if (responseCode === 409) {
         if (!duplicatedState) setIsDuplicated()
-        alert('이미 존재하는 아이디입니다.')
-      } else {
+      } else if (responseCode === 200) {
         if (duplicatedState) setIsDuplicated()
-        alert('사용 가능한 아이디입니다.')
       }
-    } finally {
+    } catch (error) {
+      console.error('오류 발생:', error)
     }
   }
 
