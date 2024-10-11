@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import BookReportHeader from "../components/Editor/BookReportHeader"
 import TextFiled from "../components/Editor/TextFiled"
 import Footer from "../components/Editor/Footer"
@@ -9,13 +10,14 @@ export default function Editor() {
   const [thumbnail, setThumbnail] = useState<string>('');
   const [bookIsbn, setBookIsbn] = useState<string>('');
   const [isPostOk, setIsPostOk] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const onPost = () => {
     // 게시하기 버튼 클릭 시 처리
   }
 
   const onCancel = () => {
-    // 작성취소 버튼 클릭 시 처리
+    navigate(-1);
   }
 
   useEffect(() => {
