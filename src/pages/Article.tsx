@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchBookData as fetchBookDetails } from '../services/BookService';
 import { HiDotsVertical } from "react-icons/hi";
 import cn from '../libs/cn';
 import Pen from '../assets/icons/Pen.svg';
 import TrashCan from '../assets/icons/TrashCan.svg';
 import DefaultThumbnail from '../assets/images/DefaultThubnail.png';
+import GoBack from '../assets/icons/GoBack.svg';
 import axios from 'axios';
 
 interface ArticleData {
@@ -26,7 +27,9 @@ export default function Article() {
   const [bookData, setBookData] = useState<ArticleBookData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!articleSlug) return;
@@ -177,6 +180,16 @@ export default function Article() {
         <div className='w-full border-t-2 border-gray-300'>
           <p className='w-full mt-6'>{context}</p>
         </div>
+      </div>
+
+      {/* 모바일 전용 푸터 */}
+      <div className='fixed bottom-0 left-0 w-full md:hidden bg-white border-t border-gray-300 p-4 flex items-center'>
+        <img
+          src={GoBack}
+          alt='뒤로가기'
+          className='w-6 h-6'
+          onClick={() => navigate(-1)}
+        />
       </div>
     </div>
   );
