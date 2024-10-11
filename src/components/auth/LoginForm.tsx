@@ -24,7 +24,7 @@ export default function LoginForm() {
     try {
       const token = await login(data)
       loginAction(token)
-      navigate('/')
+      navigate(-1)
     } catch (error) {
       console.error('로그인 에러:', error)
       alert('로그인 중 오류가 발생했습니다.')
