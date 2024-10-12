@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Review from '../components/book/Review.tsx'
 import { getDisplayAuthor } from '../libs/AuthorUtils'
 import cn from '../libs/cn.ts'
@@ -8,7 +8,7 @@ import { useAuthStore } from '../stores/UseCurrentUserStore.ts'
 import { useBookDetails } from '../hooks/UseBookDetail.ts'
 
 export default function Book() {
-  const { bookData, isAccessDenied, isReviewed, reviews } = useBookDetails() // 리뷰 데이터 가져오기
+  const { bookData, isAccessDenied, isReviewed, reviews } = useBookDetails()
   const navigate = useNavigate()
   const { isLogin } = useAuthStore()
 
@@ -19,8 +19,8 @@ export default function Book() {
           ? `/editor?isbn=${encodeURIComponent(bookData.isbn)}&bookTitle=${encodeURIComponent(bookData.title)}`
           : '/editor'
       navigate(url)
-    } else {
-      navigate('/login')
+    } else if (!isLogin) {
+      navigate('/requestLogin', { state: { from: location.pathname } })
     }
   }
 
@@ -28,7 +28,7 @@ export default function Book() {
     const articleSlug = id.toString()
 
     if (!isLogin) {
-      navigate('/requestLogin')
+      navigate('/requestLogin', { state: { from: location.pathname } })
     } else {
       navigate(`/article/${articleSlug}`)
     }

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import MainPageContext from '../components/MainPage/MainPageContext'
 import SampleReviewImg from '../assets/images/SampleReviewImg.svg'
 import cn from '../libs/cn'
@@ -7,17 +7,20 @@ import { useAuthStore } from '../stores/UseCurrentUserStore'
 
 export default function RequestLogin() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { isLogin } = useAuthStore()
 
-  const gotoLogin = () => {
-    navigate('/login')
-  }
+  const from = location.state?.from || '/'
 
   useEffect(() => {
     if (isLogin) {
-      navigate(-1)
+      navigate(from)
     }
-  }, [isLogin, navigate])
+  }, [isLogin, from, navigate])
+
+  const gotoLogin = () => {
+    navigate('/login', { state: { from } })
+  }
 
   return (
     <>
