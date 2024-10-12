@@ -63,7 +63,7 @@ export default function Header({ isBordered }: HeaderProps) {
             {isDropdownOpen && (
               <div
                 className={cn(
-                  'absolute right-4 mt-2 w-22 bg-white text-black rounded-lg',
+                  'absolute right-0 mt-2 w-24 bg-white text-black rounded-lg',
                   'shadow-md md:hidden text-center text-sm z-50'
                 )}
               >
@@ -81,7 +81,7 @@ export default function Header({ isBordered }: HeaderProps) {
                     setDropdownOpen(false)
                     handleWriteClick()
                   }}
-                  className="block w-full px-4 py-2 t"
+                  className="block w-full px-4 py-2"
                 >
                   글쓰기
                 </button>
