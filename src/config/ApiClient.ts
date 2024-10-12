@@ -12,7 +12,7 @@ apiClient.interceptors.request.use(
       !config.url.includes('/login') &&
       !config.url.includes('/register')
     ) {
-      const { accessToken } = useCurrentUserState.getState()
+      const { accessToken } = useAuthStore.getState()
       // console.log('Access Token:', accessToken) // 토큰 출력
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`
@@ -25,6 +25,5 @@ apiClient.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 )
-
 
 export default apiClient
