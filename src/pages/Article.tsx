@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchBookData as fetchBookDetails } from '../services/BookService';
 import { HiDotsVertical } from "react-icons/hi";
-import { getReview, editReview, deleteReview } from '../services/ReviewService';
+import { getReview, deleteReview } from '../services/ReviewService';
 import cn from '../libs/cn';
 import Pen from '../assets/icons/Pen.svg';
 import TrashCan from '../assets/icons/TrashCan.svg';
@@ -108,11 +108,25 @@ useEffect(() => {
   const { title: bookTitle } = bookData;
 
   const onEdit = () => {
-    alert('수정하기');
+    navigate(`/editor/?articleId=${articleSlug}`);
   };
 
   const onDelete = () => {
-    alert('삭제하기');
+    const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
+    if (confirmDelete) {
+      const deleteArticle = async () => {
+        try {
+          const response = await deleteReview(Number(articleSlug));
+          // 성공 시 response는 void이므로 바로 navigate
+          alert('게시글이 삭제되었습니다.');
+          navigate(-1);
+        } catch (error) {
+          // 에러가 발생하면 알림 표시
+          alert('게시글 삭제 중 오류가 발생했습니다.');
+        }
+      };
+      deleteArticle();
+    }
   };
 
   return (
