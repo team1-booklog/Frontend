@@ -21,15 +21,21 @@ export default function Editor() {
 
   useEffect(() => {
     if (bookIsbn) {
-      const fetchBookId1 = async () => {
-        const bookId = await fetchBookId(bookIsbn);
-        if (bookId !== null) {
-          setBookID(bookId);
-        } else {
-          console.error('책 ID를 가져오는 중 오류가 발생했습니다.');
-        }
-      };
-      fetchBookId1();
+      setTimeout(() => {
+        const fetchBookId1 = async () => {
+          const bookData = await fetchBookId(bookIsbn);
+          const responseBookId = bookData?.id;
+          const responseBookTitle = bookData?.title;
+          if (responseBookId !== undefined) {
+            setBookID(responseBookId);
+            console.log('책 ID:', responseBookId);
+            console.log('책 제목:', responseBookTitle);
+          } else {
+            console.error('책 ID를 가져오는 중 오류가 발생했습니다.');
+          }
+        };
+        fetchBookId1();
+      }, 1000);
     }
   }, [bookIsbn]);
 

@@ -6,13 +6,13 @@ interface BookIdResponse {
 }
 
 // ISBN으로 책 ID 받아오기
-export const fetchBookId = async (isbn: string): Promise<number | null> => {
+export const fetchBookId = async (isbn: string): Promise<BookIdResponse | null> => {
   try {
-    const response = await apiClient.get<BookIdResponse>(`/books/isbn/${isbn}`);
+    const response = await apiClient.get<BookIdResponse>(`/books/${isbn}`);
     const data = response.data;
 
     if (data && data.id) {
-      return data.id;
+      return data;
     } else {
       throw new Error('책 데이터를 찾을 수 없습니다.');
     }
