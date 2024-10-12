@@ -68,18 +68,20 @@ export const getUseReadBookList = async (): Promise<UserActivity | null> => {
   }
 }
 
-export const fetchBookId = async ({ isbn }: getBookIdRequest) => {
+export const fetchBookId = async ({
+  isbn,
+}: getBookIdRequest): Promise<getBookIdResponse | null> => {
   try {
     const response = await apiClient.get<getBookIdResponse>(`/books/${isbn}`)
-    console.log(response.status)
-    return response.status
+    return response.data
   } catch (error: any) {
     if (error.response?.status === 404) {
-      console.log('404')
-      return 404
+      return null
+    } else if (error.response?.status === 403) {
+      return null
     } else {
       console.error('서버 통신 실패', error)
+      throw error
     }
-    throw error
   }
 }

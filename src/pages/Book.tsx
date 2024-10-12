@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Review from '../components/book/Review.tsx'
 import { getDisplayAuthor } from '../libs/AuthorUtils'
@@ -28,12 +29,17 @@ export default function Book() {
     displayAuthor = getDisplayAuthor(bookData.author)
   }
 
+  useEffect(() => {
+    if (isAccessDenied) {
+      alert('서버에 isbn이 없어 페이지에 접근할 수 없습니다.')
+      navigate('/')
+    }
+  }, [isAccessDenied, navigate])
+
   return (
     <div>
       <div className="h-64 md:h-[552px] bg-[#f1f1f1]">
-        {isAccessDenied ? (
-          <p>접근이 거부되었습니다. 페이지에 접근할 수 없습니다.</p>
-        ) : bookData ? (
+        {bookData ? (
           <div className="flex justify-center pt-24 md:pt-36 px-6">
             <div className="flex flex-row gap-5 sm:gap-16 md:gap-28">
               <img
