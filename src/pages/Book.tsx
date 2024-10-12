@@ -20,7 +20,9 @@ export default function Book() {
           : '/editor'
       navigate(url)
     } else if (!isLogin) {
-      navigate('/requestLogin', { state: { from: location.pathname } })
+      navigate('/requestLogin', {
+        state: { from: location.pathname, action: '작성' },
+      })
     }
   }
 
@@ -28,7 +30,9 @@ export default function Book() {
     const articleSlug = id.toString()
 
     if (!isLogin) {
-      navigate('/requestLogin', { state: { from: location.pathname } })
+      navigate('/requestLogin', {
+        state: { from: location.pathname, action: '감상' },
+      })
     } else {
       navigate(`/article/${articleSlug}`)
     }
