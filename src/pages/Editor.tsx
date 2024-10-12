@@ -64,8 +64,25 @@ export default function Editor() {
       }
       postArticle();
       console.log('post');
+
     } else if (isPostOk && !isFirst) {
-      // edit
+      const editArticle = async () => {
+        const request = {
+          title: title,
+          content: context,
+          bookId: Number(bookIsbn),
+        };
+        const response = await editReview(Number(articleId), {
+          file: thumbnail,
+          request: request,
+        });
+        if ('code' in response && 'message' in response) {
+          console.log('게시글 수정 중 오류가 발생했습니다.');
+        } else {
+          navigate(-1);
+        }
+      }
+      editArticle();
       console.log('edit');
     }
   }
