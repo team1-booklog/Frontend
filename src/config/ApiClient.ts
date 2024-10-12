@@ -1,5 +1,5 @@
 import axios from 'axios'
-import useCurrentUserState from '../stores/UseCurrentUserStore'
+import { useAuthStore } from '../stores/UseCurrentUserStore'
 
 const apiClient = axios.create({
   baseURL: 'http://58.238.255.245:8080/api/v1',
