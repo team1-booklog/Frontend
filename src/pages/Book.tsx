@@ -4,7 +4,7 @@ import { useBook } from '../hooks/UseBook'
 import { getDisplayAuthor } from '../libs/AuthorUtils'
 import cn from '../libs/cn.ts'
 import NonReviwedBook from '../assets/images/NonReviewedBook.svg'
-import { useAuthStore } from '../stores/UseAuthStore.ts'
+import { useAuthStore } from '../stores/UseCurrentUserStore.ts'
 
 export default function Book() {
   const { bookData, error } = useBook()
@@ -13,12 +13,13 @@ export default function Book() {
 
   const gotoEditor = () => {
     if (isLogin) {
-      const url = bookData?.isbn && bookData.title
-        ? `/editor?isbn=${encodeURIComponent(bookData.isbn)}&bookTitle=${encodeURIComponent(bookData.title)}`
-        : '/editor';
-      navigate(url);
+      const url =
+        bookData?.isbn && bookData.title
+          ? `/editor?isbn=${encodeURIComponent(bookData.isbn)}&bookTitle=${encodeURIComponent(bookData.title)}`
+          : '/editor'
+      navigate(url)
     } else {
-      navigate('/login');
+      navigate('/login')
     }
   }
 
@@ -33,15 +34,15 @@ export default function Book() {
 
   return (
     <div>
-      <div className="w-screen h-64 md:h-[552px] bg-[#f1f1f1]">
+      <div className="h-64 md:h-[552px] bg-[#f1f1f1]">
         {bookData ? (
-          <div className="flex justify-center pt-24 md:pt-36">
+          <div className="flex justify-center pt-24 md:pt-36 px-6">
             <div className="flex flex-row gap-5 sm:gap-16 md:gap-28">
               <img
                 src={bookData.image}
                 alt={bookData.title}
                 className={cn(
-                  'w-auto h-36 md:h-80 lg:h-80 bg-[#dbdbdb] border-[1px]',
+                  'w-auto h-[140px] md:h-80 lg:h-80 bg-[#dbdbdb] border-[1px]',
                   'border-[#dbdbdb] rounded-2xl shadow-lg'
                 )}
               />
@@ -67,7 +68,7 @@ export default function Book() {
           <p>No book data available.</p>
         )}
       </div>
-      <div className="pt-6 lg:pt-14 px-7 md:px-20">
+      <div className="pt-6 lg:pt-14 px-7 pb-8 md:px-20">
         <div className="flex justify-between mx-0 md:mx-20">
           <p className="font-semibold text-2xl md:text-3xl xl:text-5xl">
             독자들의 감상평
@@ -110,9 +111,9 @@ export default function Book() {
             <img
               src={NonReviwedBook}
               alt="NonReviwedBook"
-              className="w-52 h-auto"
+              className="w-[136px] md:w-44 xl:w-52 h-auto "
             />
-            <p className="text-2xl text-[#918f8f]">
+            <p className="text-[16px] md:text-xl xl:text-2xl text-[#918f8f] mt-10 text-center text-nowrap">
               아직 남겨진 독후감이 없습니다. <br /> 첫 번째 독후감을 남겨보세요!
             </p>
           </div>
