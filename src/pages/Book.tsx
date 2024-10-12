@@ -30,11 +30,15 @@ export default function Book() {
   }
 
   useEffect(() => {
-    if (isAccessDenied) {
-      alert('서버에 isbn이 없어 페이지에 접근할 수 없습니다.')
-      navigate('/')
+    if (!isLogin) {
+      alert('로그인을 해주세요.')
+      navigate('/login')
+      if (isAccessDenied) {
+        alert('서버에 isbn이 없어 페이지에 접근할 수 없습니다.')
+        navigate('/')
+      }
     }
-  }, [isAccessDenied, navigate])
+  }, [isLogin, isAccessDenied, navigate])
 
   return (
     <div>
