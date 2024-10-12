@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { fetchBookId } from '../services/BookService.ts'
 import { useBook } from './UseBook'
+import { useCurrentBookState } from '../stores/UseCurrentBookStore.ts'
 
 export function useBookDetails() {
+  const { bookId, setBookId } = useCurrentBookState()
   const { bookData } = useBook()
   const navigate = useNavigate()
   const [isAccessDenied, setIsAccessDenied] = useState(false)
@@ -11,22 +13,21 @@ export function useBookDetails() {
   useEffect(() => {
     const fetchBookData = async () => {
       if (bookData?.isbn) {
-        try {
-          const response = await fetchBookId({ isbn: bookData.isbn })
+        const data = await fetchBookId({ isbn: bookData.isbn })
 
-          if (response === 403 || response === 404) {
-            setIsAccessDenied(true)
-          } else {
-            setIsAccessDenied(false)
-          }
-        } catch (error) {
+        if (data === null) {
+          setBookId(null)
           setIsAccessDenied(true)
+        } else {
+          setIsAccessDenied(false)
+          setBookId(data.id)
+          console.log(bookId)
         }
       }
     }
 
     fetchBookData()
-  }, [bookData?.isbn, navigate])
+  }, [bookData?.isbn, navigate, setBookId])
 
   return { bookData: isAccessDenied ? null : bookData, isAccessDenied }
 }
