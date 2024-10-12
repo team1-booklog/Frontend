@@ -12,7 +12,7 @@ export default function Review({ review, onClick }: reviewProps) {
     <>
       <div
         className={cn(
-          'md:w-36 lg:w-52 xl:w-72 lg:h-60 xl:h-80 flex flex-col',
+          'md:w-36 lg:w-52 xl:w-72 lg:h-80 flex flex-col',
           'bg-[#fafafa] shadow-lg rounded-2xl cursor-pointer',
           'hover:bg-[#FAFAFA] hover:opacity-20 hover:border-2 hover:border-[#2B5877] hover:inset-0'
         )}
@@ -31,7 +31,7 @@ export default function Review({ review, onClick }: reviewProps) {
             className="w-full md:h-auto xl:h-44 rounded-t-2xl"
           />
         )}
-        <p className="text-xs sm:text-lg xl:text-2xl text-[#2B5877] pt-2 px-3 lg:px-8">
+        <p className="text-xs sm:text-lg xl:text-2xl text-[#2B5877] pt-2 px-3 lg:px-8 lg:text-nowrap">
           {review.title}
         </p>
         <div className="flex flex-row pt-7 md:pb-3">
