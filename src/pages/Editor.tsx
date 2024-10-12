@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getReview, editReview, makeReview } from '../services/ReviewService';
-import BookReportHeader from "../components/Editor/BookReportHeader"
-import TextFiled from "../components/Editor/TextFiled"
-import Footer from "../components/Editor/Footer"
+import BookReportHeader from "../components/Editor/BookReportHeader";
+import TextFiled from "../components/Editor/TextFiled";
+import Footer from "../components/Editor/Footer";
 
 export default function Editor() {
   const [context, setContext] = useState<string>('');
   const [title, setTitle] = useState<string>(''); 
-  const [thumbnail, setThumbnail] = useState<File | undefined>(undefined); // 폼데이터 파일로
+  const [thumbnail, setThumbnail] = useState<File | string | undefined>(undefined); // File | string 타입으로 변경
   const [bookIsbn, setBookIsbn] = useState<string>('');
   const [isPostOk, setIsPostOk] = useState<boolean>(false);
-  const [isFirst, setIsFirst] = useState<boolean>(true); // 첫 게시글인시 수정인지
+  const [isFirst, setIsFirst] = useState<boolean>(true);
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -25,71 +25,105 @@ export default function Editor() {
     }
     if (articleId) {
       const fetchArticle = async () => {
-        const response = await getReview(Number(articleId));
-        if ('code' in response && 'message' in response) {
-          // ErrorResponse 타입일 경우
-          console.log('게시글 정보를 가져오는 중 오류가 발생했습니다.');
-        } else {
-          // ReviewDetailResponse 타입일 경우
-          setTitle(response.title);
-          setContext(response.content);
-          setBookIsbn(response.id.toString());
-          setIsPostOk(true);
+        try {
+          const response = await getReview(Number(articleId));
+          if ('code' in response && 'message' in response) {
+            console.error('게시글 정보를 가져오는 중 오류가 발생했습니다.');
+          } else {
+            setTitle(response.title);
+            setContext(response.content);
+            setBookIsbn(response.id.toString());
+            setThumbnail(response.file.physicalPath); // 수정: 썸네일이 URL로 제공될 경우 처리
+            setIsPostOk(true);
+          }
+        } catch (error) {
+          console.error('에러 발생:', error);
         }
       }
       fetchArticle();
-      console.log('fetch article');
       setIsFirst(false);
     }
   }, [articleId]);
 
+  // Editor.tsx
 
-  const onPost = () => {
-    if (isPostOk && isFirst) {
-      const postArticle = async () => {
-        const request = {
-          title: title,
-          content: context,
-          bookId: Number(bookIsbn),
-        };
-        const response = await makeReview({
-          file: thumbnail,
-          request: request,
-        });
-        if ('code' in response && 'message' in response) {
-          console.log('게시글 작성 중 오류가 발생했습니다.');
-        } else {
-          navigate(-1);
-        }
-      }
-      postArticle();
-      console.log('post');
+  
+const onPost = () => {
+  if (isPostOk && isFirst) {
+    const postArticle = async () => {
+      const request = {
+        title: title,
+        content: context,
+        bookId: Number(bookIsbn), // 백엔드와 협의 필요
+      };
 
-    } else if (isPostOk && !isFirst) {
-      const editArticle = async () => {
-        const request = {
-          title: title,
-          content: context,
-          bookId: Number(bookIsbn),
-        };
-        const response = await editReview(Number(articleId), {
-          file: thumbnail,
-          request: request,
-        });
-        if ('code' in response && 'message' in response) {
-          console.log('게시글 수정 중 오류가 발생했습니다.');
-        } else {
-          navigate(-1);
-        }
+      const formData = new FormData();
+      formData.append('request', JSON.stringify(request));
+
+      if (thumbnail && typeof thumbnail !== 'string') {
+        formData.append('file', thumbnail);
       }
-      editArticle();
-      console.log('edit');
-    }
+
+      // 필요에 따라 bookId를 별도로 추가
+      // formData.append('bookId', bookIsbn);
+
+      // FormData 내용 확인
+      for (let pair of formData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+      }
+
+      try {
+        const response = await makeReview(formData);
+        // 응답 처리
+        navigate(`/book/${bookIsbn}`);
+      } catch (error) {
+        console.error('게시글 작성 실패:', error);
+      }
+    };
+    postArticle();
+  } else if (isPostOk && !isFirst) {
+    const editArticle = async () => {
+      const request = {
+        title: title,
+        content: context,
+        bookId: Number(bookIsbn), // 백엔드와 협의 필요
+      };
+
+      const formData = new FormData();
+      formData.append('request', JSON.stringify(request));
+
+      if (thumbnail && typeof thumbnail !== 'string') {
+        formData.append('file', thumbnail);
+      }
+
+      // 필요에 따라 bookId를 별도로 추가
+      // formData.append('bookId', bookIsbn);
+
+      // FormData 내용 확인
+      for (let pair of formData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+      }
+
+      try {
+        const response = await editReview(Number(articleId), formData);
+        navigate(`/article/${articleId}`);
+        // 응답 처리
+      } catch (error) {
+        console.error('게시글 수정 실패:', error);
+      }
+    };
+    editArticle();
   }
+};
+
+  
+
+  
+  
 
   const onCancel = () => {
     navigate(-1);
-  }
+  };
 
   useEffect(() => {
     if (title && context && bookIsbn) {
@@ -97,8 +131,7 @@ export default function Editor() {
     } else {
       setIsPostOk(false);
     }
-  }
-  , [title, context, bookIsbn]);
+  }, [title, context, bookIsbn]);
 
   return (
     <div className='min-h-screen'>

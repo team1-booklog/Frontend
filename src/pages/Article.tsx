@@ -58,11 +58,12 @@ useEffect(() => {
             context: response.content,
             bookIsbn: response.id.toString(),
             date: response.createdAt,
-            thumbnail: response.file.physicalPath,
+            thumbnail: response.file?.physicalPath,
           };
           setArticleData(tempData);
         }
       } catch (err) {
+        console.error(err);
         setError('게시글 정보를 가져오는 중 오류가 발생했습니다.');
       }
     };
