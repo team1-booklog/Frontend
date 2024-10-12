@@ -31,7 +31,7 @@ export default function Book() {
 
   useEffect(() => {
     if (isAccessDenied) {
-      alert('페이지에 접근할 수 없습니다.')
+      alert('서버에 isbn이 없어 페이지에 접근할 수 없습니다.')
       navigate('/')
     }
   }, [isAccessDenied, navigate])
