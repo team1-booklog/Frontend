@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import Review from '../components/book/Review.tsx'
-import { useBook } from '../hooks/UseBook'
 import { getDisplayAuthor } from '../libs/AuthorUtils'
 import cn from '../libs/cn.ts'
 import NonReviwedBook from '../assets/images/NonReviewedBook.svg'
 import { useAuthStore } from '../stores/UseCurrentUserStore.ts'
+import { useBookDetails } from '../hooks/UseBookDetail.ts'
 
 export default function Book() {
-  const { bookData, error } = useBook()
+  const { bookData, isAccessDenied } = useBookDetails()
   const navigate = useNavigate()
   const { isLogin } = useAuthStore()
 
@@ -23,10 +23,6 @@ export default function Book() {
     }
   }
 
-  if (error) {
-    return <p>Error: {error}</p>
-  }
-
   let displayAuthor = ''
   if (bookData) {
     displayAuthor = getDisplayAuthor(bookData.author)
@@ -35,7 +31,9 @@ export default function Book() {
   return (
     <div>
       <div className="h-64 md:h-[552px] bg-[#f1f1f1]">
-        {bookData ? (
+        {isAccessDenied ? (
+          <p>접근이 거부되었습니다. 페이지에 접근할 수 없습니다.</p>
+        ) : bookData ? (
           <div className="flex justify-center pt-24 md:pt-36 px-6">
             <div className="flex flex-row gap-5 sm:gap-16 md:gap-28">
               <img
