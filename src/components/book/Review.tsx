@@ -34,11 +34,11 @@ export default function Review({ review, onClick }: reviewProps) {
         <p className="text-xs sm:text-lg xl:text-2xl text-[#2B5877] pt-2 px-3 lg:px-8">
           {review.title}
         </p>
-        <div className="flex flex-grow pt-7 pb-3 lg:py-3 md:py-4 xl:py-8">
-          <p className="text-xs text-nowrap xl:text-sm text-[#2B5877] ml-3 lg:ml-8">
+        <div className="flex flex-row pt-7 md:pb-3">
+          <p className="text-xs text-nowrap xl:text-sm text-[#2B5877] ml-3 lg:ml-8 lg:py-3 md:py-4 xl:py-8">
             {review.userId}
           </p>
-          <p className="text-xs text-nowrap xl:text-sm text-[#918F8F] pl-8 lg:pl-10 xl:pl-24">
+          <p className="w-full text-xs text-nowrap xl:text-sm text-[#918F8F] pl-8 lg:pl-10 xl:pl-24 lg:py-3 md:py-4 xl:py-8">
             {review.updatedAt}
           </p>
         </div>
