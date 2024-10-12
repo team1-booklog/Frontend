@@ -8,7 +8,7 @@ import { useAuthStore } from '../stores/UseCurrentUserStore.ts'
 import { useBookDetails } from '../hooks/UseBookDetail.ts'
 
 export default function Book() {
-  const { bookData, isAccessDenied, isReviewed } = useBookDetails()
+  const { bookData, isAccessDenied, isReviewed, reviews } = useBookDetails() // 리뷰 데이터 가져오기
   const navigate = useNavigate()
   const { isLogin } = useAuthStore()
 
@@ -21,6 +21,16 @@ export default function Book() {
       navigate(url)
     } else {
       navigate('/login')
+    }
+  }
+
+  const gotoArticle = (id: number) => {
+    const articleSlug = id.toString()
+
+    if (!isLogin) {
+      navigate('/requestLogin')
+    } else {
+      navigate(`/article/${articleSlug}`)
     }
   }
 
@@ -105,22 +115,22 @@ export default function Book() {
         {isReviewed ? (
           <div className="flex justify-center mt-11">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto">
-              <Review />
-              <Review />
-              <Review />
-              <Review />
+              {reviews.map((review) => (
+                <Review
+                  key={review.id}
+                  review={review}
+                  onClick={() => gotoArticle(review.id)}
+                />
+              ))}
             </div>
           </div>
         ) : (
-          <div className="flex flex-col px-20 pt-14 items-center">
+          <div className="mt-12 flex justify-center">
             <img
               src={NonReviwedBook}
-              alt="NonReviwedBook"
-              className="w-[136px] md:w-44 xl:w-52 h-auto "
+              alt="No Reviews"
+              className="h-44 md:h-60 lg:h-80"
             />
-            <p className="text-[16px] md:text-xl xl:text-2xl text-[#918f8f] mt-10 text-center text-nowrap">
-              아직 남겨진 독후감이 없습니다. <br /> 첫 번째 독후감을 남겨보세요!
-            </p>
           </div>
         )}
       </div>
