@@ -20,6 +20,7 @@ export function useBookDetails() {
           setIsAccessDenied(true)
         } else {
           setIsAccessDenied(false)
+          console.log(data)
           setBookId(data.id)
           console.log(bookId)
         }
@@ -27,7 +28,7 @@ export function useBookDetails() {
     }
 
     fetchBookData()
-  }, [bookData?.isbn, navigate, setBookId])
+  }, [bookData?.isbn, navigate, setBookId, bookId])
 
   return { bookData: isAccessDenied ? null : bookData, isAccessDenied }
 }
