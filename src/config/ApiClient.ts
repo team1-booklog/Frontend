@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useAuthStore } from '../stores/UseCurrentUserStore'
 
 const apiClient = axios.create({
-  baseURL: 'http://58.238.255.245:8080/api/v1',
+  baseURL: 'https://api-booklog.ezbooks.kr/api/v1',
 })
 
 apiClient.interceptors.request.use(
