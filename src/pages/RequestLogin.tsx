@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import MainPageContext from '../components/MainPage/MainPageContext'
 import SampleReviewImg from '../assets/images/SampleReviewImg.svg'
 import cn from '../libs/cn'
@@ -7,17 +7,21 @@ import { useAuthStore } from '../stores/UseCurrentUserStore'
 
 export default function RequestLogin() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { isLogin } = useAuthStore()
 
-  const gotoLogin = () => {
-    navigate('/login')
-  }
+  const from = location.state?.from || '/'
+  const action = location.state?.action || '작성'
 
   useEffect(() => {
     if (isLogin) {
-      navigate(-1)
+      navigate(from)
     }
-  }, [isLogin, navigate])
+  }, [isLogin, from, navigate])
+
+  const gotoLogin = () => {
+    navigate('/login', { state: { from } })
+  }
 
   return (
     <>
@@ -30,7 +34,8 @@ export default function RequestLogin() {
             className="w-[175.48px] md:w-[327px] h-[182.45px] md:h-[340px] mx-[67.76px] md:mx-auto object-contain"
           />
           <p className="text-[#4e4d4d] text-xs sm:text-2xl pt-[41.23px] sm:pt-[77px] text-center text-nowrap">
-            독후감을 작성하려면 <span className="text-[#EC6B53]">로그인</span>
+            독후감을 {action}하려면
+            <span className="text-[#EC6B53]">로그인</span>
             해주세요!
           </p>
         </div>
