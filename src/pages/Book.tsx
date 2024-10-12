@@ -1,13 +1,14 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Review from '../components/book/Review.tsx'
-import { useBook } from '../hooks/UseBook'
 import { getDisplayAuthor } from '../libs/AuthorUtils'
 import cn from '../libs/cn.ts'
 import NonReviwedBook from '../assets/images/NonReviewedBook.svg'
 import { useAuthStore } from '../stores/UseCurrentUserStore.ts'
+import { useBookDetails } from '../hooks/UseBookDetail.ts'
 
 export default function Book() {
-  const { bookData, error } = useBook()
+  const { bookData, isAccessDenied } = useBookDetails()
   const navigate = useNavigate()
   const { isLogin } = useAuthStore()
 
@@ -23,14 +24,17 @@ export default function Book() {
     }
   }
 
-  if (error) {
-    return <p>Error: {error}</p>
-  }
-
   let displayAuthor = ''
   if (bookData) {
     displayAuthor = getDisplayAuthor(bookData.author)
   }
+
+  useEffect(() => {
+    if (isAccessDenied) {
+      alert('서버에 isbn이 없어 페이지에 접근할 수 없습니다.')
+      navigate('/')
+    }
+  }, [isAccessDenied, navigate])
 
   return (
     <div>
@@ -42,10 +46,11 @@ export default function Book() {
                 src={bookData.image}
                 alt={bookData.title}
                 className={cn(
-                  'w-auto h-[140px] md:h-80 lg:h-80 bg-[#dbdbdb] border-[1px]',
-                  'border-[#dbdbdb] rounded-2xl shadow-lg'
+                  'w-[95px] md:w-auto h-[140px] md:h-80 lg:h-80 bg-[#dbdbdb] border-[1px]',
+                  'border-[#dbdbdb] rounded-2xl shadow-lg object-cover'
                 )}
               />
+
               <div className="flex flex-col w-48 xl:w-[654px] pt-2 md:pt-16">
                 <div className="flex flex-col gap-2 xl:gap-8">
                   <p className="max-w-[648px] max-h-[93px] font-semibold text-sm md:text-2xl xl:text-4xl line-clamp-1">

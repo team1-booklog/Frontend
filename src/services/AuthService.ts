@@ -7,7 +7,6 @@ import { ReissueRequest } from '../model/ReissueRequest'
 import { ReissueResponse } from '../model/ReissueResponse'
 import { useAuthStore } from '../stores/UseCurrentUserStore'
 import { DuplicationRequest } from '../model/DuplicationRequest'
-import { DuplicationResponse } from '../model/DuplicationResponse'
 
 export const maintainLoginState = async () => {
   const storedRefreshToken = localStorage.getItem('refreshToken')
