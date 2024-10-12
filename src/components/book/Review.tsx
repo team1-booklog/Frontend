@@ -22,7 +22,7 @@ export default function Review({ review, onClick }: reviewProps) {
           <img
             src={review.file.physicalPath}
             alt={review.file.logicalName}
-            className="w-full md:h-auto xl:h-44 rounded-t-2xl object-contain"
+            className="w-full md:h-auto xl:h-44 rounded-t-2xl object-cover"
           />
         ) : (
           <img
