@@ -10,7 +10,8 @@ apiClient.interceptors.request.use(
     if (
       config.url &&
       !config.url.includes('/login') &&
-      !config.url.includes('/register')
+      !config.url.includes('/register') &&
+      !config.url.includes('/book')
     ) {
       const { accessToken } = useAuthStore.getState()
       // console.log('Access Token:', accessToken) // 토큰 출력
