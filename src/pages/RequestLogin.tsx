@@ -1,14 +1,23 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import MainPageContext from '../components/MainPage/MainPageContext'
 import SampleReviewImg from '../assets/images/SampleReviewImg.svg'
 import cn from '../libs/cn'
+import { useAuthStore } from '../stores/UseCurrentUserStore'
 
 export default function RequestLogin() {
   const navigate = useNavigate()
+  const { isLogin } = useAuthStore()
 
   const gotoLogin = () => {
     navigate('/login')
   }
+
+  useEffect(() => {
+    if (isLogin) {
+      navigate(-1)
+    }
+  }, [isLogin, navigate])
 
   return (
     <>
