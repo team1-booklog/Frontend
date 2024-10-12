@@ -16,9 +16,6 @@ export function useBookDetails() {
 
           if (response === 403 || response === 404) {
             setIsAccessDenied(true)
-
-            alert('페이지에 접근할 수 없습니다.')
-            navigate('/')
           } else {
             setIsAccessDenied(false)
           }
@@ -31,5 +28,5 @@ export function useBookDetails() {
     fetchBookData()
   }, [bookData?.isbn, navigate])
 
-  return { bookData, isAccessDenied }
+  return { bookData: isAccessDenied ? null : bookData, isAccessDenied }
 }
