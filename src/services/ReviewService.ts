@@ -4,14 +4,19 @@ import { ReviewSuccessResponse, ErrorResponse, ReviewDetailResponse } from '../m
 import apiClient from '../config/ApiClient'
 
 // 독후감 생성
-export const makeReview = async (data: ReviewMakeFormData): Promise<ReviewSuccessResponse | ErrorResponse> => {
+export const makeReview = async (data: FormData): Promise<ReviewSuccessResponse | ErrorResponse> => {
   try {
-    const response = await apiClient.post<ReviewSuccessResponse>('/reviews', data)
-    return response.data
+    const response = await apiClient.post<ReviewSuccessResponse>('/reviews', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
   } catch (error) {
-    return handleError(error)
+    return handleError(error);
   }
-}
+};
+
 
 // 독후감 조회
 export const getReview = async (id: number): Promise<ReviewDetailResponse | ErrorResponse> => {
@@ -24,14 +29,18 @@ export const getReview = async (id: number): Promise<ReviewDetailResponse | Erro
 }
 
 // 독후감 수정
-export const editReview = async (reviewId: number, data: ReviewEditFormData): Promise<ReviewDetailResponse | ErrorResponse> => {
+export const editReview = async (reviewId: number, data: FormData): Promise<ReviewDetailResponse | ErrorResponse> => {
   try {
-    const response = await apiClient.patch<ReviewDetailResponse>(`/reviews/${reviewId}`, data)
-    return response.data
+    const response = await apiClient.patch<ReviewDetailResponse>(`/reviews/${reviewId}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
   } catch (error) {
-    return handleError(error)
+    return handleError(error);
   }
-}
+};
 
 // 독후감 삭제
 export const deleteReview = async (reviewId: number): Promise<void | ErrorResponse> => {
