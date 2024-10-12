@@ -6,8 +6,8 @@ import Search from './Search';
 interface BookReportHeaderEditorProps {
   title: string;
   setTitle: (value: string) => void;
-  thumbnail: string;
-  setThumbnail: (value: string) => void;
+  thumbnail: File | undefined; // 수정: thumbnail 타입 변경
+  setThumbnail: (value: File | undefined) => void;
   bookIsbn: string;
   setBookIsbn: (value: string) => void;
 }
@@ -20,8 +20,7 @@ export default function BookReportHeaderEditor(
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setThumbnail(imageUrl); // 이미지 미리보기
+      setThumbnail(file); // 파일로 설정
     }
   };
 
@@ -43,7 +42,7 @@ export default function BookReportHeaderEditor(
       <div className="hidden md:block mr-10 text-left max-w-36">
         <h2 className='text-xl md:text-2xl text-[#2B5877]'>썸네일</h2>
         <img
-          src={thumbnail || DefaultThubnail} 
+          src={thumbnail ? URL.createObjectURL(thumbnail) : DefaultThubnail} 
           alt="썸네일" 
           className="x-24 md:x-32 xl:w-36 h-24 md:h-32 xl:h-36 rounded-xl shadow-lg" 
         />
@@ -83,7 +82,7 @@ export default function BookReportHeaderEditor(
           <div className="flex flex-col items-start md:hidden ml-3">
             <h2 className="text-center text-base text-[#2B5877] mb-2">썸네일</h2>
             <img
-              src={thumbnail || DefaultThubnail} 
+              src={thumbnail ? URL.createObjectURL(thumbnail) : DefaultThubnail} 
               alt="썸네일" 
               onClick={handleThumbnailClick}
               className="w-14 h-14 rounded-lg" 
