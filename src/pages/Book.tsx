@@ -42,10 +42,11 @@ export default function Book() {
                 src={bookData.image}
                 alt={bookData.title}
                 className={cn(
-                  'w-auto h-[140px] md:h-80 lg:h-80 bg-[#dbdbdb] border-[1px]',
-                  'border-[#dbdbdb] rounded-2xl shadow-lg'
+                  'w-[95px] md:w-auto h-[140px] md:h-80 lg:h-80 bg-[#dbdbdb] border-[1px]',
+                  'border-[#dbdbdb] rounded-2xl shadow-lg object-cover'
                 )}
               />
+
               <div className="flex flex-col w-48 xl:w-[654px] pt-2 md:pt-16">
                 <div className="flex flex-col gap-2 xl:gap-8">
                   <p className="max-w-[648px] max-h-[93px] font-semibold text-sm md:text-2xl xl:text-4xl line-clamp-1">
