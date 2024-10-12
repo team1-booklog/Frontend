@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 
 interface CurrentBookState {
-  bookId: string | null
-  setBookId: (bookId: string | null) => void
+  bookId: number | null
+  setBookId: (bookId: number | null) => void
 }
 
 export const useCurrentBookState = create<CurrentBookState>((set) => ({

@@ -8,7 +8,7 @@ import { useAuthStore } from '../stores/UseCurrentUserStore.ts'
 import { useBookDetails } from '../hooks/UseBookDetail.ts'
 
 export default function Book() {
-  const { bookData, isAccessDenied } = useBookDetails()
+  const { bookData, isAccessDenied, isReviewed } = useBookDetails()
   const navigate = useNavigate()
   const { isLogin } = useAuthStore()
 
@@ -31,12 +31,11 @@ export default function Book() {
 
   useEffect(() => {
     if (!isLogin) {
-      alert('로그인을 해주세요.')
+      alert('로그인을 해주세요')
       navigate('/login')
-      if (isAccessDenied) {
-        alert('서버에 isbn이 없어 페이지에 접근할 수 없습니다.')
-        navigate('/')
-      }
+    } else if (isAccessDenied) {
+      alert('서버에 isbn이 없어 페이지에 접근할 수 없습니다.')
+      navigate('/')
     }
   }, [isLogin, isAccessDenied, navigate])
 
@@ -106,7 +105,7 @@ export default function Book() {
             </div>
           </button>
         </div>
-        {bookData?.isbn === '9791163034735' ? (
+        {isReviewed ? (
           <div className="flex justify-center mt-11">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto">
               <Review />
