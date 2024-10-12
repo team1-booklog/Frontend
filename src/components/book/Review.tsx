@@ -4,16 +4,19 @@ import { Review as ReviewType } from '../../model/ReviewListResponse'
 
 interface reviewProps {
   review: ReviewType
+  onClick?: () => void
 }
 
-export default function Review({ review }: reviewProps) {
+export default function Review({ review, onClick }: reviewProps) {
   return (
     <>
       <div
         className={cn(
-          'md:w-36 lg:w-52 xl:w-72 lg:h-60 xl:h-80 flex flex-col bg-[#fafafa] shadow-lg rounded-2xl',
+          'md:w-36 lg:w-52 xl:w-72 lg:h-60 xl:h-80 flex flex-col',
+          'bg-[#fafafa] shadow-lg rounded-2xl cursor-pointer',
           'hover:bg-[#FAFAFA] hover:opacity-20 hover:border-2 hover:border-[#2B5877] hover:inset-0'
         )}
+        onClick={onClick}
       >
         {review.file ? (
           <img

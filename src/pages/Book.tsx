@@ -24,6 +24,11 @@ export default function Book() {
     }
   }
 
+  const gotoArticle = (id: number) => {
+    const articleSlug = id.toString()
+    navigate(`/article/${articleSlug}`)
+  }
+
   let displayAuthor = ''
   if (bookData) {
     displayAuthor = getDisplayAuthor(bookData.author)
@@ -106,7 +111,11 @@ export default function Book() {
           <div className="flex justify-center mt-11">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto">
               {reviews.map((review) => (
-                <Review key={review.id} review={review} />
+                <Review
+                  key={review.id}
+                  review={review}
+                  onClick={() => gotoArticle(review.id)}
+                />
               ))}
             </div>
           </div>
