@@ -26,7 +26,12 @@ export default function Book() {
 
   const gotoArticle = (id: number) => {
     const articleSlug = id.toString()
-    navigate(`/article/${articleSlug}`)
+
+    if (!isLogin) {
+      navigate('/requestLogin')
+    } else {
+      navigate(`/article/${articleSlug}`)
+    }
   }
 
   let displayAuthor = ''
